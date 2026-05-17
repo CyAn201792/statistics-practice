@@ -330,8 +330,7 @@ function renderQuestionCard() {
       const isCurrent = index === currentStepIndex;
       const isPast = index < currentStepIndex;
       const blueprintHint =
-        step.hint ||
-        `Formula template: ${step.expected.replace(/\d+(\.\d+)?/g, "[Value]")}`;
+        step.hint || `${step.expected.replace(/\d+(\.\d+)?/g, "[Value]")}`;
 
       html += `
                 <div id="step-card-${index}" class="p-4 rounded border transition-all duration-150 ${
@@ -370,7 +369,7 @@ function renderQuestionCard() {
                     </div>
                     
                     <div id="step-hint-${index}" class="mt-2.5 p-3 bg-blue-50/50 border border-blue-100 text-slate-700 rounded text-xs font-mono hidden leading-relaxed dark:bg-blue-950/30 dark:border-blue-900 dark:text-slate-200">
-                        <span class="font-bold text-blue-800 uppercase block mb-1 text-[10px] dark:text-blue-300">Structural Blueprint Guidance:</span>
+                        <span class="font-bold text-blue-800 uppercase block mb-1 text-[10px] dark:text-blue-300">Expected Format:</span>
                         ${blueprintHint}
                     </div>
                     <div id="step-feedback-${index}" class="mt-2 text-xs font-mono hidden"></div>
