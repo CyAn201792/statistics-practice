@@ -1,0 +1,621 @@
+[
+  {
+    "id": 1,
+    "difficulty": "Easy",
+    "type": "normal_distribution_probability",
+    "prompt": "The monthly electricity bill for households in a city is normally distributed with a mean (μ) of $120 and a standard deviation (σ) of $25. Find the probability that a randomly selected household has a bill of less than $95.",
+    "examPrompt": "The monthly electricity bill for households in a city is normally distributed with a mean (μ) of $120 and a standard deviation (σ) of $25. Find the probability that a randomly selected household has a bill of less than $95.",
+    "answerFormat": "Please express your answer to 4 decimal places.",
+    "answer": "0.1587",
+    "explanation": "Step 1: Given μ = 120, σ = 25, X = 95. Step 2-3: Z-score = (95 - 120) / 25 = -25 / 25 = -1. Step 4: For negative Z-scores, the cumulative probability is 0.5 minus the area above zero. P(Z ≤ -1) = 0.5 - 0.3413 = 0.1587. Therefore, the probability that a randomly selected household has a bill less than $95 is **0.1587** (or 15.87%).",
+    "chartData": {
+      "mu": 120,
+      "sigma": 25,
+      "targetX": 95
+    }
+  },
+  {
+    "id": 2,
+    "difficulty": "Easy",
+    "type": "normal_distribution_inverse",
+    "prompt": "A packaging plant fills cereal boxes. The weight of the boxes is normally distributed with a mean of 450 grams and a standard deviation of 8 grams. The company wants to identify the cutoff weight for the heaviest 5% of boxes so they can be flagged for quality checking. What is this cutoff weight?",
+    "examPrompt": "A packaging plant fills cereal boxes. The weight of the boxes is normally distributed with a mean of 450 grams and a standard deviation of 8 grams. The company wants to identify the cutoff weight for the heaviest 5% of boxes so they can be flagged for quality checking. What is this cutoff weight?",
+    "answerFormat": "Please round your answer to 2 decimal places.",
+    "answer": "463.16",
+    "explanation": "Step 1: Identify given distribution metrics where mean = 450g and standard deviation = 8g. Step 2: The heaviest 5% represents an upper-tail probability of 0.05, leaving a body area of 0.4500 between the mean and our target threshold. Utilizing a standard mean-to-Z table, an area of 0.4500 maps to a critical value of Z = 1.645. Step 3: Set up the translation equation to scale the standard score back to the problem context: X = mean + (Z × standard deviation) = 450 + (1.645 × 8). Step 4: Simplify the expression to arrive at a final evaluation of 450 + 13.16 = 463.16 grams.",
+    "chartData": {
+      "mu": 450,
+      "sigma": 8,
+      "targetX": 463.16
+    }
+  },
+  {
+    "id": 3,
+    "difficulty": "Easy",
+    "type": "confidence_interval_mean",
+    "prompt": "A logistics specialist samples 64 delivery routes and finds a mean travel time of 42 minutes with a sample standard deviation of 16 minutes. Construct the standard error of the mean needed to build a confidence interval.",
+    "examPrompt": "A logistics specialist samples 64 delivery routes and finds a mean travel time of 42 minutes with a sample standard deviation of 16 minutes. Construct the standard error of the mean needed to build a confidence interval.",
+    "answerFormat": "Please express your answer as a whole number.",
+    "answer": "2",
+    "explanation": "The standard error is calculated by dividing the sample standard deviation by the square root of the sample size: 16 / sqrt(64) = 16 / 8 = 2 minutes.",
+    "chartData": {
+      "mu": 42,
+      "sigma": 2,
+      "targetX": 42
+    }
+  },
+  {
+    "id": 4,
+    "difficulty": "Easy",
+    "type": "hypothesis_testing_z",
+    "prompt": "An internet service provider claims their average download speed is at least 100 Mbps. A consumer group tests 36 households and finds a sample mean speed of 94 Mbps with a known population standard deviation (σ) of 18 Mbps. Calculate the test statistic (Z-score) for this sample mean.",
+    "examPrompt": "An internet service provider claims their average download speed is at least 100 Mbps. A consumer group tests 36 households and finds a sample mean speed of 94 Mbps with a known population standard deviation (σ) of 18 Mbps. Calculate the test statistic (Z-score) for this sample mean.",
+    "answerFormat": "Please state your answer using 2 decimal places.",
+    "answer": "-2.00",
+    "explanation": "The standard error is 18 / 6 = 3. The test statistic Z is (94 - 100) / 3 = -6 / 3 = -2.00.",
+    "chartData": {
+      "mu": 100,
+      "sigma": 3,
+      "targetX": 94
+    }
+  },
+  {
+    "id": 5,
+    "difficulty": "Easy",
+    "type": "weighted_average_summary",
+    "prompt": "A university student's final grade profile consists of homework assignments (worth 20% of the grade), a midterm exam (worth 30%), and a final exam (worth 50%). If the student scored 90 on homework, 80 on the midterm, and 86 on the final exam, calculate their final weighted grade percentage.",
+    "examPrompt": "A university student's final grade profile consists of homework assignments (worth 20% of the grade), a midterm exam (worth 30%), and a final exam (worth 50%). If the student scored 90 on homework, 80 on the midterm, and 86 on the final exam, calculate their final weighted grade percentage.",
+    "answerFormat": "Please express your answer using 2 decimal places.",
+    "answer": "85.00",
+    "explanation": "The weighted average is calculated as: (90 * 0.2) + (80 * 0.3) + (86 * 0.5) = 18 + 24 + 43 = 85%.",
+    "chartData": {
+      "mu": 85,
+      "sigma": 5,
+      "targetX": null
+    }
+  },
+  {
+    "id": 6,
+    "difficulty": "Easy",
+    "type": "weighted_average_finance",
+    "prompt": "A small startup raises $1 million at an interest rate of 6%, $3 million at a rate of 10%, and $1 million at a rate of 5%. Calculate the weighted average cost of capital (WACC) as a percentage. Please express all answers in millions.",
+    "examPrompt": "A small startup raises $1 million at an interest rate of 6%, $3 million at a rate of 10%, and $1 million at a rate of 5%. Calculate the weighted average cost of capital (WACC) as a percentage. Please express all answers in millions.",
+    "answerFormat": "Please express your answer as a percentage using 2 decimal places.",
+    "answer": "8.20",
+    "explanation": "Total capital is 5 million. The weighted sum is 6 + 30 + 5 = 41. 41 / 5 gives a weighted interest rate of 8.2%.",
+    "chartData": {
+      "mu": 8.2,
+      "sigma": 1,
+      "targetX": null
+    }
+  },
+  {
+    "id": 7,
+    "difficulty": "Easy",
+    "type": "weighted_average_labor",
+    "prompt": "A region consists of five cities. City A has 10,000 workers with an unemployment rate of 8%. City B has 40,000 workers with an unemployment rate of 3%. City C has 30,000 workers with an unemployment rate of 5%. City D has 20,000 workers with an unemployment rate of 7%. City E has 10,000 workers with an unemployment rate of 10%. Find the combined unemployment rate percentage for the entire region.",
+    "examPrompt": "A region consists of five cities. City A has 10,000 workers with an unemployment rate of 8%. City B has 40,000 workers with an unemployment rate of 3%. City C has 30,000 workers with an unemployment rate of 5%. City D has 20,000 workers with an unemployment rate of 7%. City E has 10,000 workers with an unemployment rate of 10%. Find the combined unemployment rate percentage for the entire region.",
+    "answerFormat": "Please express your answer as a percentage using 2 decimal places.",
+    "answer": "5.36",
+    "explanation": "Total workers = 110,000. Total unemployed workers = 800 + 1,200 + 1,500 + 1,400 + 1,000 = 5,900. 5,900 / 110,000 = 5.36%.",
+    "chartData": {
+      "mu": 5.36,
+      "sigma": 1.5,
+      "targetX": null
+    }
+  },
+  {
+    "id": 8,
+    "difficulty": "Easy",
+    "type": "weighted_average_claims",
+    "prompt": "During a weather event, an insurance branch receives 15 claims of $600 each and 5 claims of $1400 each. What is the mean claim size in dollars?",
+    "examPrompt": "During a weather event, an insurance branch receives 15 claims of $600 each and 5 claims of $1400 each. What is the mean claim size in dollars?",
+    "answerFormat": "Please express your answer as a whole number.",
+    "answer": "800",
+    "explanation": "Total cost = $9,000 + $7,000 = $16,000. Total claims = 20. Mean size = 16000 / 20 = $800.",
+    "chartData": {
+      "mu": 800,
+      "sigma": 100,
+      "targetX": null
+    }
+  },
+  {
+    "id": 9,
+    "difficulty": "Easy",
+    "type": "expected_value_investment",
+    "prompt": "An investor faces a venture opportunity. There is a 30% chance of making a $5,000 gain, a 50% chance of making a $1,000 gain, and a 20% chance of a $4,000 loss. Calculate the expected monetary value of this investment.",
+    "examPrompt": "An investor faces a venture opportunity. There is a 30% chance of making a $5,000 gain, a 50% chance of making a $1,000 gain, and a 20% chance of a $4,000 loss. Calculate the expected monetary value of this investment.",
+    "answerFormat": "Please express your answer as a whole number.",
+    "answer": "1200",
+    "explanation": "Expected Value = (5000 * 0.3) + (1000 * 0.5) - (4000 * 0.2) = 1500 + 500 - 800 = $1,200.",
+    "chartData": {
+      "mu": 1200,
+      "sigma": 200,
+      "targetX": null
+    }
+  },
+  {
+    "id": 10,
+    "difficulty": "Easy",
+    "type": "expected_value_sales",
+    "prompt": "A bakery counts daily demand for specialty cakes: 10 cakes (prob = 0.2), 20 cakes (prob = 0.6), and 30 cakes (prob = 0.2). What is the expected number of cakes demanded daily?",
+    "examPrompt": "A bakery counts daily demand for specialty cakes: 10 cakes (prob = 0.2), 20 cakes (prob = 0.6), and 30 cakes (prob = 0.2). What is the expected number of cakes demanded daily?",
+    "answerFormat": "Please express your answer as a whole number.",
+    "answer": "20",
+    "explanation": "Expected value = 2 + 12 + 6 = 20 cakes.",
+    "chartData": {
+      "mu": 20,
+      "sigma": 4,
+      "targetX": null
+    }
+  },
+  {
+    "id": 11,
+    "difficulty": "Intermediate",
+    "type": "expected_value_raffle",
+    "prompt": "A charity sells raffle tickets for $15. There is a 1 in 200 chance (0.005) of winning a grand prize of $1,200, and a 5 in 200 chance (0.025) of winning a second-place prize of $200. All other tickets win nothing. From the ticket buyer's perspective, what is the net expected value outcome?",
+    "examPrompt": "A charity sells raffle tickets for $15. There is a 1 in 200 chance (0.005) of winning a grand prize of $1,200, and a 5 in 200 chance (0.025) of winning a second-place prize of $200. All other tickets win nothing. From the ticket buyer's perspective, what is the net expected value outcome?",
+    "answerFormat": "Please express your answer as a whole number.",
+    "answer": "-4",
+    "explanation": "Expected grand prize is 1200 * 0.005 = $6. Expected second prize is 200 * 0.025 = $5. Total prize EV is $6 + $5 = $11. Net outcome value is $11 - $15 ticket price = -$4.00.",
+    "chartData": {
+      "mu": -4,
+      "sigma": 1,
+      "targetX": null
+    }
+  },
+  {
+    "id": 12,
+    "difficulty": "Hard",
+    "type": "normal_distribution_lower",
+    "prompt": "The lifespan of a commercial cooling fan is normally distributed with a mean of 8.0 years and a standard deviation of 1.5 years. What is the probability (expressed as a decimal rounded to four places) that a randomly selected unit will break down in less than 5.6 years?",
+    "examPrompt": "The lifespan of a commercial cooling fan is normally distributed with a mean of 8.0 years and a standard deviation of 1.5 years. What is the probability (expressed as a decimal rounded to four places) that a randomly selected unit will break down in less than 5.6 years?",
+    "answerFormat": "Please express your answer using 4 decimal places.",
+    "answer": "0.0548",
+    "explanation": "Z = (5.6 - 8.0) / 1.5 = -2.4 / 1.5 = -1.60. Looking up Z = -1.60 in the cumulative normal distribution table yields a lower-tail area probability of 0.0548.",
+    "chartData": {
+      "mu": 8,
+      "sigma": 1.5,
+      "targetX": 5.6
+    }
+  },
+  {
+    "id": 13,
+    "difficulty": "Hard",
+    "type": "normal_distribution_inverse_upper",
+    "prompt": "Commute times on a rail line are normally distributed with a mean of 34 minutes and a standard deviation of 4 minutes. The transit authority wants to identify the slowest 10% of commutes for a system review. What is the minimum threshold time in minutes (rounded to two decimal places) to be included in this slowest 10%?",
+    "examPrompt": "Commute times on a rail line are normally distributed with a mean of 34 minutes and a standard deviation of 4 minutes. The transit authority wants to identify the slowest 10% of commutes for a system review. What is the minimum threshold time in minutes (rounded to two decimal places) to be included in this slowest 10%?",
+    "answerFormat": "Please express your answer using 2 decimal places.",
+    "answer": "39.12",
+    "explanation": "An upper tail of 10% means 90% of commutes are shorter. A lower-tail area of 0.9000 maps to a critical Z-score of 1.28. Solving for X: X = μ + Zσ = 34 + (1.28)(4) = 34 + 5.12 = 39.12 minutes.",
+    "chartData": {
+      "mu": 34,
+      "sigma": 4,
+      "targetX": 39.12
+    }
+  },
+  {
+    "id": 14,
+    "difficulty": "Easy",
+    "type": "normal_distribution_percentile",
+    "prompt": "An engineering test has scores normally distributed with a mean of 70 and a standard deviation of 10. The top 10% of scorers receive an honors certificate. If the critical Z-score for the top 10% is 1.28, what score must a student achieve?",
+    "examPrompt": "An engineering test has scores normally distributed with a mean of 70 and a standard deviation of 10. The top 10% of scorers receive an honors certificate. If the critical Z-score for the top 10% is 1.28, what score must a student achieve?",
+    "answerFormat": "Please express your answer using 2 decimal places.",
+    "answer": "82.80",
+    "explanation": "To reach the 90th percentile threshold: 70 + (1.28 * 10) = 70 + 12.8 = 82.8.",
+    "chartData": {
+      "mu": 70,
+      "sigma": 10,
+      "targetX": 82.8
+    }
+  },
+  {
+    "id": 15,
+    "difficulty": "Intermediate",
+    "type": "confidence_interval_proportion",
+    "prompt": "In a sample of 467 survey respondents, 92 report using public transport daily. First, calculate the standard error of the sample proportion. Finally, calculate the margin of error for a 95% confidence interval using a critical value of Z = 1.96.",
+    "examPrompt": "In a sample of 467 survey respondents, 92 report using public transport daily. First, calculate the standard error of the sample proportion. Finally, calculate the margin of error for a 95% confidence interval using a critical value of Z = 1.96.",
+    "answerFormat": "Please express your answer using 4 decimal places.",
+    "answer": "0.0361",
+    "explanation": "Standard Error = sqrt((0.197 * 0.803) / 467) = sqrt(0.158211 / 467) = sqrt(0.00033878) = 0.0184. Margin of Error = Z * SE = 1.96 * 0.0184 = 0.036064, which rounds to 0.0361.",
+    "chartData": {
+      "mu": 0.197,
+      "sigma": 0.0184,
+      "targetX": 0.197
+    }
+  },
+  {
+    "id": 16,
+    "difficulty": "Intermediate",
+    "type": "confidence_interval_margin",
+    "prompt": "A scientist computes a standard error of 3.0 grams for a sample dataset. She wants to calculate the margin of error for a 95% confidence interval using a critical value of Z = 1.96. What is the margin of error?",
+    "examPrompt": "A scientist computes a standard error of 3.0 grams for a sample dataset. She wants to calculate the margin of error for a 95% confidence interval using a critical value of Z = 1.96. What is the margin of error?",
+    "answerFormat": "Please express your answer using 2 decimal places.",
+    "answer": "5.88",
+    "explanation": "Margin of Error = Z * SE = 1.96 * 3 = 5.88 grams.",
+    "chartData": {
+      "mu": 100,
+      "sigma": 3,
+      "targetX": null
+    }
+  },
+  {
+    "id": 17,
+    "difficulty": "Intermediate",
+    "type": "confidence_interval_bounds",
+    "prompt": "A real estate analysis shows a sample mean house sale price of $227,602 with a margin of error of $12,547. First, calculate the total width of the confidence interval. Finally, calculate the upper and lower bounds using the mean and margin of error.",
+    "examPrompt": "A real estate analysis shows a sample mean house sale price of $227,602 with a margin of error of $12,547. First, calculate the total width of the confidence interval. Finally, calculate the upper and lower bounds using the mean and margin of error.",
+    "answerFormat": "Please express your answer in the following format: (lower bound, upper bound). Please use comma separators for thousands if applicable.",
+    "answer": "(215,055, 240,149)",
+    "explanation": "The total width of the interval is 2 * $12,547 = $25,094. The lower bound is $227,602 - $12,547 = $215,055 and the upper bound is $227,602 + $12,547 = $240,149, resulting in the interval format (215,055, 240,149).",
+    "chartData": {
+      "mu": 227602,
+      "sigma": 12547,
+      "targetX": null
+    }
+  },
+  {
+    "id": 18,
+    "difficulty": "Hard",
+    "type": "weighted_average_target",
+    "prompt": "A student's syllabus splits their grade into three categories: Homework (20%), Midterms (50%), and a Final Exam (30%). So far, the student has a 90.0% homework average and a 72.0% midterm average. What exact score percentage must the student achieve on the final exam to bring their overall final course grade to exactly 80.0%?",
+    "examPrompt": "A student's syllabus splits their grade into three categories: Homework (20%), Midterms (50%), and a Final Exam (30%). So far, the student has a 90.0% homework average and a 72.0% midterm average. What exact score percentage must the student achieve on the final exam to bring their overall final course grade to exactly 80.0%?",
+    "answerFormat": "Please express your answer as a percentage using 2 decimal places.",
+    "answer": "86.67",
+    "explanation": "Homework points = 90 * 0.20 = 18. Midterm points = 72 * 0.50 = 36. Total points earned so far = 18 + 36 = 54. Points needed from final exam = 80 - 54 = 26. Required final exam score = 26 / 0.30 = 86.67%.",
+    "chartData": {
+      "mu": 80,
+      "sigma": 5,
+      "targetX": null
+    }
+  },
+  {
+    "id": 19,
+    "difficulty": "Intermediate",
+    "type": "weighted_average_portfolio",
+    "prompt": "An investment fund splits its capital allocations across three distinct assets. Asset A holds $2.5 million at an annual growth yield of 12.4%. Asset B holds $4.5 million yielding 8.2%. Asset C holds $1.0 million yielding a negative loss of -4.5%. Find the net weighted average yield percentage across the total combined portfolio.",
+    "examPrompt": "An investment fund splits its capital allocations across three distinct assets. Asset A holds $2.5 million at an annual growth yield of 12.4%. Asset B holds $4.5 million yielding 8.2%. Asset C holds $1.0 million yielding a negative loss of -4.5%. Find the net weighted average yield percentage across the total combined portfolio.",
+    "answerFormat": "Please express your answer as a percentage using 3 decimal places.",
+    "answer": "7.925",
+    "explanation": "Total value = 2.5 + 4.5 + 1.0 = 8.0 million. The weighted product sum is (2.5 * 12.4) + (4.5 * 8.2) + (1.0 * -4.5) = 31.0 + 36.9 - 4.5 = 63.4. Dividing 63.4 by 8.0 yields a net portfolio performance metric of 7.925%.",
+    "chartData": {
+      "mu": 7.925,
+      "sigma": 1.5,
+      "targetX": null
+    }
+  },
+  {
+    "id": 20,
+    "difficulty": "Hard",
+    "type": "weighted_average_dynamic_mix",
+    "prompt": "A manufacturing plant processes premium brass alloys by mixing three elements. It uses 120 kg of copper costing $9.50/kg, 60 kg of zinc costing $4.20/kg, and an expensive raw stabilizer additive weighing 20 kg. If the combined weighted average cost of the entire raw compound mixture balances out to exactly $8.61/kg, compute the standalone cost per kilogram ($) of the stabilizer additive component.",
+    "examPrompt": "A manufacturing plant processes premium brass alloys by mixing three elements. It uses 120 kg of copper costing $9.50/kg, 60 kg of zinc costing $4.20/kg, and an expensive raw stabilizer additive weighing 20 kg. If the combined weighted average cost of the entire raw compound mixture balances out to exactly $8.61/kg, compute the standalone cost per kilogram ($) of the stabilizer additive component.",
+    "answerFormat": "Please express your answer using 2 decimal places.",
+    "answer": "16.50",
+    "explanation": "Total mass is 120 + 60 + 20 = 200 kg, valuing the aggregate compound batch at 200 * $8.61 = $1,722. Subtracting known component costs ($1,140 copper + $252 zinc = $1,392) leaves a residual cost allocation of $1,722 - $1,392 = $330 for the stabilizer. Dividing $330 / 20 kg yields a standalone cost of $16.50 per kg.",
+    "chartData": {
+      "mu": 8.61,
+      "sigma": 2,
+      "targetX": null
+    }
+  },
+  {
+    "id": 21,
+    "difficulty": "Hard",
+    "type": "expected_value_inventory_risk",
+    "prompt": "A hardware merchant purchases commercial heaters for $150 each and retails them for $250. Units left unsold at the end of winter cannot be returned; instead, they carry an absolute holding/disposal cost penalty of $30 each. If historical client seasonal demand probabilities dictate exactly 10 units (prob = 0.40) or 20 units (prob = 0.60), calculate the net expected financial profit outcome ($) if the merchant proactively speculates and stocks a rigid inventory volume of 20 units.",
+    "examPrompt": "A hardware merchant purchases commercial heaters for $150 each and retails them for $250. Units left unsold at the end of winter cannot be returned; instead, they carry an absolute holding/disposal cost penalty of $30 each. If historical client seasonal demand probabilities dictate exactly 10 units (prob = 0.40) or 20 units (prob = 0.60), calculate the net expected financial profit outcome ($) if the merchant proactively speculates and stocks a rigid inventory volume of 20 units.",
+    "answerFormat": "Please express your answer as a whole number.",
+    "answer": "880",
+    "explanation": "If demand is 10: revenue is 10 * $250 = $2500, initial inventory cost is 20 * $150 = $3000, and disposal fees add 10 * $30 = $300, leading to a net loss of $2500 - $3000 - $300 = -$800. If demand is 20: all units sell, creating a flat net profit of 20 * ($250 - $150) = $2000. Expected value calculation: (-800 * 0.40) + (2000 * 0.60) = -320 + 1200 = $880.",
+    "chartData": {
+      "mu": 880,
+      "sigma": 250,
+      "targetX": null
+    }
+  },
+  {
+    "id": 22,
+    "difficulty": "Intermediate",
+    "type": "expected_value_asymmetric_wager",
+    "prompt": "A trading desk analyzes an options matrix. The first outcome yields a gain of $45,000 (prob = 0.15). The second outcome results in a break-even scenario (prob = 0.55). The third outcome triggers a stop-loss and results in a loss of -$12,500 (prob = 0.30). First, calculate the expected yield resulting from these three outcomes. Next, conduct a one-tailed Z-test at a 5% significance level (α = 0.05) to determine if the strategy is significantly underperforming its expected yield. The sample size is 100 independent trades, the population standard deviation is $500, and the sample mean yield is $2,900. State the calculated Z-statistic and whether you reject or fail to reject the null hypothesis.",
+    "examPrompt": "A trading desk analyzes an options matrix. The first outcome yields a gain of $45,000 (prob = 0.15). The second outcome results in a break-even scenario (prob = 0.55). The third outcome triggers a stop-loss and results in a loss of -$12,500 (prob = 0.30). First, calculate the expected yield resulting from these three outcomes. Next, conduct a one-tailed Z-test at a 5% significance level (α = 0.05) to determine if the strategy is significantly underperforming its expected yield. The sample size is 100 independent trades, the population standard deviation is $500, and the sample mean yield is $2,900. Please state whether you reject or fail to reject the null hypothesis.",
+    "answerFormat": "Please type 'Reject' or 'Fail to reject'.",
+    "answer": "Reject",
+    "explanation": "Expected Yield = (45,000 * 0.15) + (0 * 0.55) + (-12,500 * 0.30) = 6,750 + 0 - 3,750 = $3,000. For the Z-test, the Standard Error (SE) = 500 / sqrt(100) = 50. The Z-statistic = (2,900 - 3,000) / 50 = -2.0. Because the critical value for a lower-tailed Z-test at α = 0.05 is -1.645, and our calculated Z (-2.0) is less than -1.645, we reject the null hypothesis. The strategy is significantly underperforming.",
+    "chartData": {
+      "mu": 3000,
+      "sigma": 50,
+      "targetX": 2900
+    }
+  },
+  {
+    "id": 23,
+    "difficulty": "Hard",
+    "type": "expected_value_tuition_payoff",
+    "prompt": "An educational center offers a specialized executive boot camp section with a fixed overhead of $18,000 regardless of class attendance size. Enrollment probabilities are tracked as follows: 15 students (prob = 0.25), 25 students (prob = 0.50), or 40 students (prob = 0.25). If the center bills tuition at a standard rate of $800 per student, calculate the net expected operational profit ($) generated by running the course module.",
+    "examPrompt": "An educational center offers a specialized executive boot camp section with a fixed overhead of $18,000 regardless of class attendance size. Enrollment probabilities are tracked as follows: 15 students (prob = 0.25), 25 students (prob = 0.50), or 40 students (prob = 0.25). If the center bills tuition at a standard rate of $800 per student, calculate the net expected operational profit ($) generated by running the course module.",
+    "answerFormat": "Please express your answer as a whole number.",
+    "answer": "3000",
+    "explanation": "Expected enrollment headcount equates to 3.75 + 12.5 + 10 = 26.25 students. Expected gross tuition revenue = 26.25 * $800 = $21,000. Subtracting the fixed operating overhead threshold cost ($18,000) leaves an expected net profit of $3,000.",
+    "chartData": {
+      "mu": 3000,
+      "sigma": 7141,
+      "targetX": null
+    }
+  },
+  {
+    "id": 24,
+    "difficulty": "Hard",
+    "type": "hypothesis_testing_aerospace_threshold",
+    "prompt": "The historical mean operational breakdown threshold temperature for an aerospace component is 192.74°C with a known population standard deviation (σ) of 6.5°C. A quality control engineer suspects a new production batch is underperforming and breaking down at lower temperatures. A random sample of 100 components from the new batch is tested, yielding a sample mean breakdown temperature of 191.44°C. Conduct a one-tailed Z-test at a 2.5% significance level (α = 0.025) to determine if the new batch is significantly underperforming.",
+    "examPrompt": "The historical mean operational breakdown threshold temperature for an aerospace component is 192.74°C with a known population standard deviation (σ) of 6.5°C. A quality control engineer suspects a new production batch is underperforming and breaking down at lower temperatures. A random sample of 100 components from the new batch is tested, yielding a sample mean breakdown temperature of 191.44°C. Conduct a one-tailed Z-test at a 2.5% significance level (α = 0.025) to determine if the new batch is significantly underperforming.",
+    "answerFormat": "Please type 'Reject' or 'Fail to reject'.",
+    "answer": "Reject",
+    "explanation": "The Standard Error (SE) is calculated as 6.5 / sqrt(100) = 0.65. The Z-statistic is calculated as (191.44 - 192.74) / 0.65 = -1.30 / 0.65 = -2.0. For a one-tailed lower-tail test at α = 0.025, the critical Z-value is -1.96. Because our calculated Z-statistic (-2.0) is less than the critical value (-1.96), we reject the null hypothesis. There is significant evidence that the new batch is underperforming.",
+    "chartData": {
+      "mu": 192.74,
+      "sigma": 0.65,
+      "targetX": 191.44
+    }
+  },
+  {
+    "id": 25,
+    "difficulty": "Hard",
+    "type": "normal_distribution_find_sd",
+    "prompt": "The concrete cure timeframe metrics for a commercial building site are normally distributed with an expected population average mean timeline of 24.0 hours. Field quality evaluations confirm that exactly 10% of batches take longer than 28.5 hours to set completely. Find the required standard deviation (σ) parameter.",
+    "examPrompt": "The concrete cure timeframe metrics for a commercial building site are normally distributed with an expected population average mean timeline of 24.0 hours. Field quality evaluations confirm that exactly 10% of batches take longer than 28.5 hours to set completely. Find the required standard deviation (σ) parameter.",
+    "answerFormat": "Please express your answer using 2 decimal places.",
+    "answer": "3.52",
+    "explanation": "Using the standard equation layout: 1.28 = (28.5 - 24) / σ. This simplifies to 1.28 * σ = 4.5. Performing division establishes the standard deviation metric at 4.5 / 1.28 = 3.52 hours.",
+    "chartData": {
+      "mu": 24,
+      "sigma": 3.52,
+      "targetX": 28.5
+    }
+  },
+  {
+    "id": 26,
+    "difficulty": "Hard",
+    "type": "hypothesis_testing_z_test",
+    "prompt": "A financial asset index portfolio follows a normal distribution with a historical population mean return of 11.2% and a population standard deviation of 3.2%. An investment manager claims their new active strategy significantly outperforms the index. A random sample of 16 independent trading periods under this new strategy yields a sample mean return of 12.8%. Test the manager's claim at a 5% significance level (α = 0.05).",
+    "examPrompt": "A financial asset index portfolio follows a normal distribution with a historical population mean return of 11.2% and a population standard deviation of 3.2%. An investment manager claims their new active strategy significantly outperforms the index. A random sample of 16 independent trading periods under this new strategy yields a sample mean return of 12.8%. Test the manager's claim at a 5% significance level (α = 0.05).",
+    "answerFormat": "Please type 'Reject' or 'Fail to reject'.",
+    "answer": "Reject",
+    "explanation": "1. The null hypothesis assumes no change: H₀: μ = 11.2%. 2. The manager claims outperformance, making it a right-tailed test: Hₐ: μ > 11.2%. 3. The standard error is σ / √n = 3.2 / √16 = 0.8%. The Z-statistic is calculated as: Z = (12.8 - 11.2) / 0.8 = 1.6 / 0.8 = 2.00. 4. Since the calculated Z-score of 2.00 is greater than the critical value of 1.645 (or p-value 0.0228 < 0.05), we reject the null hypothesis. There is sufficient evidence to support the claim that the new strategy outperforms the index.",
+    "chartData": {
+      "mu": 11.2,
+      "sigma": 0.8,
+      "targetX": 12.8
+    }
+  },
+  {
+    "id": 27,
+    "difficulty": "Hard",
+    "type": "confidence_interval_high_proportion",
+    "prompt": "A rigorous cleanroom compliance medical sample screening audits 1,200 biological micro-assays and isolates exactly 900 reactions. Please calculate the standard error of the sample proportion.",
+    "examPrompt": "A rigorous cleanroom compliance medical sample screening audits 1,200 biological micro-assays and isolates exactly 900 reactions. Please calculate the standard error of the sample proportion.",
+    "answerFormat": "Please express your answer using 4 decimal places.",
+    "answer": "0.0125",
+    "explanation": "Standard Error parameter equals sqrt((0.75 * 0.25) / 1200) = sqrt(0.1875 / 1200) = sqrt(0.00015625) = 0.0125.",
+    "chartData": {
+      "mu": 0.75,
+      "sigma": 0.0125,
+      "targetX": 0.75
+    }
+  },
+  {
+    "id": 28,
+    "difficulty": "Hard",
+    "type": "confidence_interval_high_precision_margin",
+    "prompt": "A financial data scientist extracts a sample with a standard error of 1.75 units. She wants to configure a 99% confidence interval. Please calculate the resulting margin of error value.",
+    "examPrompt": "A financial data scientist extracts a sample with a standard error of 1.75 units. She wants to configure a 99% confidence interval. Please calculate the resulting margin of error value.",
+    "answerFormat": "Please express your answer using 3 decimal places.",
+    "answer": "4.515",
+    "explanation": "Margin of Error parameter bounds follow linear transformation paths: Z * SE = 2.58 * 1.75 = 4.515 scale units.",
+    "chartData": {
+      "mu": 50,
+      "sigma": 1.75,
+      "targetX": null
+    }
+  },
+  {
+    "id": 29,
+    "difficulty": "Intermediate",
+    "type": "hypothesis_testing_one_prop_z_test",
+    "prompt": "A political polling firm wants to test a claim that a mayoral candidate has majority support, meaning their true population proportion (p) is greater than 50%. In a random sample of 400 registered voters, exactly 55% state they plan to vote for the candidate. Test this claim at a 5% significance level (α = 0.05).",
+    "examPrompt": "A political polling firm wants to test a claim that a mayoral candidate has majority support, meaning their true population proportion (p) is greater than 50%. In a random sample of 400 registered voters, exactly 55% state they plan to vote for the candidate. Test this claim at a 5% significance level (α = 0.05).",
+    "answerFormat": "Please type 'Reject' or 'Fail to reject'.",
+    "answer": "Reject",
+    "explanation": "1. The null hypothesis states there is no majority support: H₀: p = 0.50. 2. The claim is that support is greater than majority, indicating a right-tailed test: Hₐ: p > 0.50. 3. The sample proportion is 55%, or 0.55. 4. Under the null hypothesis, the standard error is √[(0.50 * 0.50) / 400] = √(0.25 / 400) = 0.025. 5. The Z-test statistic is calculated as: Z = (0.55 - 0.50) / 0.025 = 0.05 / 0.025 = 2.00. 6. The critical value for a right-tailed test at α = 0.05 is 1.645. 7. Because the calculated Z-score of 2.00 is greater than the critical value of 1.645, we reject the null hypothesis. There is sufficient evidence to support the claim.",
+    "chartData": {
+      "mu": 0.5,
+      "sigma": 0.025,
+      "targetX": 0.55
+    }
+  },
+  {
+    "id": 30,
+    "difficulty": "Intermediate",
+    "type": "weighted_average_lawyer",
+    "prompt": "Based on legal auditing metrics: A consultant spends 30 hours on research ($120/hr), 15 hours in client hearings ($300/hr), and 5 hours in direct consultation ($180/hr). Calculate her average billable earnings per hour for this week.",
+    "examPrompt": "Based on legal auditing metrics: A consultant spends 30 hours on research ($120/hr), 15 hours in client hearings ($300/hr), and 5 hours in direct consultation ($180/hr). Calculate her average billable earnings per hour for this week.",
+    "answerFormat": "Please express your answer using 2 decimal places.",
+    "answer": "180.00",
+    "explanation": "Total revenue is calculated as follows: (30 hours * $120) + (15 hours * $300) + (5 hours * $180) = $3,600 + $4,500 + $900 = $9,000. The total time spent is 30 + 15 + 5 = 50 hours. Dividing the total revenue by total hours yields the weighted average: $9,000 / 50 hours = $180.00 per hour.",
+    "chartData": {
+      "type": "bar",
+      "categories": ["Research", "Hearings", "Consultation"],
+      "hours": [30, 15, 5],
+      "rates": [120, 300, 180]
+    }
+  },
+  {
+    "id": 31,
+    "difficulty": "Intermediate",
+    "type": "weighted_average_grade_target",
+    "prompt": "Based on standard syllabus weighting frameworks: A student has an overall average of 84.0% across prior class work which accounts for 70% of the total grade. If the upcoming final exam is worth the remaining 30%, what exact score must they get on the final exam to finish with an 85.0% overall average in the course?",
+    "examPrompt": "Based on standard syllabus weighting frameworks: A student has an overall average of 84.0% across prior class work which accounts for 70% of the total grade. If the upcoming final exam is worth the remaining 30%, what exact score must they get on the final exam to finish with an 85.0% overall average in the course?",
+    "answerFormat": "Please express your answer as a percentage using 2 decimal places without the percent sign.",
+    "answer": "87.33",
+    "explanation": "Prior coursework supplies 84.0 * 0.70 = 58.8 points toward the final grade. To reach an overall target of 85.0 points, the final exam must supply the remaining points: 85.0 - 58.8 = 26.2 points. Because the final exam is worth 30% of the grade, we divide the needed points by the exam's weight: 26.2 / 0.30 = 87.33%.",
+    "chartData": {
+      "type": "bar",
+      "categories": ["Prior Coursework", "Final Exam"],
+      "weights": [70, 30],
+      "scores": [84, 87.33]
+    }
+  },
+  {
+    "id": 32,
+    "difficulty": "Intermediate",
+    "type": "hypothesis_testing_one_prop_z_test",
+    "prompt": "The national baseline unemployment rate is set at 5.0%. A regional labor economist claims that Region North has a lower true population unemployment rate than the rest of the nation. In a random sample of 400 workers from Region North, exactly 12 are found to be unemployed. Test the economist's claim at a 5% significance level (α = 0.05).",
+    "examPrompt": "The national baseline unemployment rate is set at 5.0%. A regional labor economist claims that Region North has a lower true population unemployment rate than the rest of the nation. In a random sample of 400 workers from Region North, exactly 12 are found to be unemployed. Test the economist's claim at a 5% significance level (α = 0.05).",
+    "answerFormat": "Please type 'Reject' or 'Fail to reject'.",
+    "answer": "Reject",
+    "explanation": "1. The null hypothesis assumes the regional rate equals the national baseline: H₀: p = 0.05. 2. The claim is that the regional rate is lower, indicating a left-tailed test: Hₐ: p < 0.05. 3. The sample proportion is p̂ = 12 / 400 = 0.03. 4. Under the null hypothesis, the standard error is √[(0.05 * 0.95) / 400] = √(0.0475 / 400) = 0.0109. 5. The Z-test statistic is calculated as: Z = (0.03 - 0.05) / 0.0109 = -0.02 / 0.0109 = -1.83. 6. The critical value for a left-tailed test at α = 0.05 is -1.645. 7. Because the calculated Z-score of -1.83 is less than (further in the tail than) the critical value of -1.645, it falls into the rejection region. We reject the null hypothesis.",
+    "chartData": {
+      "mu": 0.05,
+      "sigma": 0.0109,
+      "targetX": 0.03
+    }
+  },
+  {
+    "id": 33,
+    "difficulty": "Intermediate",
+    "type": "expected_value_course_profit",
+    "prompt": "Based on operational cost matrixes: Course enrollment is modeled as 15 students (prob = 0.30) or 40 students (prob = 0.70). It costs the university a fixed $6,000 to run the section while tuition is $400 per student. Calculate the expected net institutional operational profit ($) of running this class.",
+    "examPrompt": "Based on operational cost matrixes: Course enrollment is modeled as 15 students (prob = 0.30) or 40 students (prob = 0.70). It costs the university a fixed $6,000 to run the section while tuition is $400 per student. Calculate the expected net institutional operational profit ($) of running this class.",
+    "answerFormat": "Please express your answer using comma separators for thousands.",
+    "answer": "7,000",
+    "explanation": "The expected class size is calculated as: (15 * 0.30) + (40 * 0.70) = 4.5 + 28.0 = 32.5 students. Expected gross revenue is 32.5 students * $400 = $13,000. Subtracting the fixed operating overhead ($6,000) yields a final expected net institutional profit of $7,000.",
+    "chartData": {
+      "type": "expected_value_profit",
+      "categories": ["Low Enrollment (15)", "High Enrollment (40)"],
+      "probabilities": [0.3, 0.7],
+      "netProfit": [0, 10000],
+      "expectedProfit": 7000
+    }
+  },
+  {
+    "id": 34,
+    "difficulty": "Intermediate",
+    "type": "hypothesis_testing_one_mean_z_test",
+    "prompt": "Historical distribution logistics show that a warehouse sells a population average mean of 1,800 gallons of premium paint per month with a known population standard deviation (σ) of 300 gallons. The store manager claims that a recent contractor promotion has significantly increased monthly paint sales. A random sample of 36 months following the promotion yields a sample mean sales volume of 1,920 gallons. Test the manager's claim at a 5% significance level (α = 0.05).",
+    "examPrompt": "Historical distribution logistics show that a warehouse sells a population average mean of 1,800 gallons of premium paint per month with a known population standard deviation (σ) of 300 gallons. The store manager claims that a recent contractor promotion has significantly increased monthly paint sales. A random sample of 36 months following the promotion yields a sample mean sales volume of 1,920 gallons. Test the manager's claim at a 5% significance level (α = 0.05).",
+    "answerFormat": "Please type 'Reject' or 'Fail to reject'.",
+    "answer": "Reject",
+    "explanation": "1. The null hypothesis assumes sales have not changed: H₀: mu = 1800. 2. The manager claims sales increased, indicating a right-tailed test: Hₐ: mu > 1800. 3. The sample mean given in the prompt is 1,920 gallons. 4. The standard error is calculated as σ / √n = 300 / √36 = 300 / 6 = 50. 5. The Z-test statistic is calculated as: Z = (1920 - 1800) / 50 = 120 / 50 = 2.40. 6. The critical value for a right-tailed test at α = 0.05 is 1.645. 7. Because the calculated Z-score of 2.40 is greater than the critical value of 1.645, it falls deep into the rejection region. We reject the null hypothesis.",
+    "chartData": {
+      "mu": 1800,
+      "sigma": 50,
+      "targetX": 1920
+    }
+  },
+  {
+    "id": 35,
+    "difficulty": "Intermediate",
+    "type": "expected_value_beverage_refills",
+    "prompt": "Based on restaurant dining data logs: Customers request exactly 1 refill (prob = 0.40), 2 refills (prob = 0.50), or 3 refills (prob = 0.10). Find the expected value of refills a single random visitor consumes.",
+    "examPrompt": "Based on restaurant dining data logs: Customers request exactly 1 refill (prob = 0.40), 2 refills (prob = 0.50), or 3 refills (prob = 0.10). Find the expected value of refills a single random visitor consumes.",
+    "answerFormat": "Please express your answer using 1 decimal place.",
+    "answer": "1.7",
+    "explanation": "The expected refill volume per consumer is calculated as: (1 * 0.40) + (2 * 0.50) + (3 * 0.10) = 0.4 + 1.0 + 0.3 = 1.7 refills.",
+    "chartData": {
+      "type": "bar",
+      "categories": ["1 Refill", "2 Refills", "3 Refills"],
+      "probabilities": [0.4, 0.5, 0.1]
+    }
+  },
+  {
+    "id": 36,
+    "difficulty": "Hard",
+    "type": "normal_distribution_prof_curve",
+    "prompt": "Based on continuous academic curves: A professor establishes that her class grades possess a standard deviation (σ) of 4%. She awards an 'A' grade to only the top 8% of her class. If her 'A' grade threshold cutoff boundary score line lands at exactly 86.0%, find the population mean score (μ) of this distribution.",
+    "examPrompt": "Based on continuous academic curves: A professor establishes that her class grades possess a standard deviation (σ) of 4%. She awards an 'A' grade to only the top 8% of her class. If her 'A' grade threshold cutoff boundary score line lands at exactly 86.0%, find the population mean score (μ) of this distribution.",
+    "answerFormat": "Please express your answer using 2 decimal places without the percent sign.",
+    "answer": "80.36",
+    "explanation": "Using the Z-score equation for the 92nd percentile (Z = 1.41): 1.41 = (86 - μ) / 4. Multiplying both sides by 4 gives 5.64 = 86 - μ. Solving for μ places the distribution center exactly at 86 - 5.64 = 80.36%.",
+    "chartData": {
+      "mu": 80.36,
+      "sigma": 4,
+      "targetX": 86
+    }
+  },
+  {
+    "id": 37,
+    "difficulty": "Hard",
+    "type": "normal_distribution_corporate_closure",
+    "prompt": "Based on commercial outlet management procedures: Weekly regional corporate branch sales follow a normal curve with a mean of $2.5 million and a standard deviation of $0.75 million ($750,000). The chain decides to close the underperforming bottom 15% of stores with the lowest revenue. Calculate the baseline weekly sales threshold in millions below which a store will be closed.",
+    "examPrompt": "Based on commercial outlet management procedures: Weekly regional corporate branch sales follow a normal curve with a mean of $2.5 million and a standard deviation of $0.75 million ($750,000). The chain decides to close the underperforming bottom 15% of stores with the lowest revenue. Calculate the baseline weekly sales threshold in millions below which a store will be closed.",
+    "answerFormat": "Please express your answer in millions using 2 decimal places without a dollar sign.",
+    "answer": "1.72",
+    "explanation": "To map out the lower 15th percentile line boundary using a standard Z-table: 2.5 + (-1.04 * 0.75) = 2.5 - 0.78 = 1.72 million in weekly sales revenue.",
+    "chartData": {
+      "mu": 2.5,
+      "sigma": 0.75,
+      "targetX": 1.72
+    }
+  },
+  {
+    "id": 38,
+    "difficulty": "Hard",
+    "type": "hypothesis_testing_one_mean_z_test",
+    "prompt": "Based on commission performance tracking systems, weekly sales outputs historically follow a normal distribution with a population mean of 25 completed transactions and a population standard deviation (σ) of 8 transactions. A regional manager implements a new training program and claims it significantly increases the team's weekly output. A random sample of 16 sales representatives under the new program yields a sample mean of 29.1 completed transactions. Test the manager's claim at a 5% significance level (α = 0.05).",
+    "examPrompt": "Based on commission performance tracking systems, weekly sales outputs historically follow a normal distribution with a population mean of 25 completed transactions and a population standard deviation (σ) of 8 transactions. A regional manager implements a new training program and claims it significantly increases the team's weekly output. A random sample of 16 sales representatives under the new program yields a sample mean of 29.1 completed transactions. Test the manager's claim at a 5% significance level (α = 0.05).",
+    "answerFormat": "Please type 'Reject' or 'Fail to reject'.",
+    "answer": "Reject",
+    "explanation": "1. Hypotheses: The null baseline assumes no improvement (H₀: μ = 25), while the manager's active outperformance claim sets up a right-tailed test (Hₐ: μ > 25). 2. Sampling Error: With a population standard deviation of 8 evaluated across 16 sample points, the standard error shrinks to 8 / √16 = 8 / 4 = 2 whole units. 3. Test Statistic: The sample mean of 29.1 shifts a raw distance of +4.1 transactions above baseline. Standardizing this value yields: Z = (29.1 - 25) / 2 = 4.1 / 2 = 2.05. 4. Decision Rules: At a 5% significance level, our critical boundary is Z = 1.645. Because our calculated test statistic of 2.05 lands further out in the upper tail than 1.645 (corresponding to a clean p-value of roughly 0.0202, which is less than α = 0.05), we reject H₀. The data provides statistically significant evidence that the new training framework increases weekly transaction output.",
+    "chartData": {
+      "mu": 25,
+      "sigma": 2,
+      "targetX": 29.1
+    }
+  },
+  {
+    "id": 39,
+    "difficulty": "Hard",
+    "type": "confidence_interval_pass_fail",
+    "prompt": "Based on academic policy polling: A random survey sample of 110 college students shows that exactly 60 support a pass-fail grading elective track. Calculate the sample standard error of the proportion.",
+    "examPrompt": "Based on academic policy polling: A random survey sample of 110 college students shows that exactly 60 support a pass-fail grading elective track. Calculate the sample standard error of the proportion.",
+    "answerFormat": "Please express your answer using 5 decimal places.",
+    "answer": "0.04748",
+    "explanation": "1. The sample proportion is p̂ = 60 / 110 = 0.545454..., which rounds to 0.5455. 2. Using the standard error formula with our rounded value: SE = √[(0.5455 * 0.4545) / 110] = √[0.2479299 / 110] = √(0.0022539) = 0.04748. This value represents the standard deviation of the sampling distribution.",
+    "chartData": {
+      "mu": 0.5455,
+      "sigma": 0.04748,
+      "targetX": 0.5455
+    }
+  },
+  {
+    "id": 40,
+    "difficulty": "Hard",
+    "type": "confidence_interval_popcorn_mean",
+    "prompt": "Based on commercial facility inventory sheets: A theater tracks popping metrics across 80 movie screening samples, uncovering a mean consumption rate of 55.6 boxes alongside a sample standard deviation of 12.3 boxes. Calculate the 95% confidence interval for the population mean.",
+    "examPrompt": "Based on commercial facility inventory sheets: A theater tracks popping metrics across 80 movie screening samples, uncovering a mean consumption rate of 55.6 boxes alongside a sample standard deviation of 12.3 boxes. Calculate the 95% confidence interval for the population mean.",
+    "answerFormat": "Use the following format: (Lower Bound, Upper Bound). Please express your answer using 3 decimal places.",
+    "answer": "(52.905, 58.295)",
+    "explanation": "1. Standard Error (SE) = 12.3 / sqrt(80) = 12.3 / 8.944 = 1.375 boxes. 2. For a 95% confidence level, the Z-critical value is 1.96. 3. Lower Bound = 55.6 - 2.695 = 52.905. Upper Bound = 55.6 + 2.695 = 58.295. Final Interval: (52.905, 58.295).",
+    "chartData": {
+      "mu": 55.6,
+      "sigma": 1.375,
+      "targetX": 55.6
+    }
+  },
+  {
+    "id": 41,
+    "difficulty": "Hard",
+    "type": "confidence_interval_ncaa_bounds",
+    "prompt": "Based on league compliance tracking records: An inspector samples 48 sports matches and monitors an average combined score output of 135 points with an evaluated standard error of the mean equal to exactly 2.60 points. Calculate the margin of error for a 95% confidence interval",
+    "examPrompt": "Based on league compliance tracking records: An inspector samples 48 sports matches and monitors an average combined score output of 135 points with an evaluated standard error of the mean equal to exactly 2.60 points. Calculate the margin of error for a 95% confidence interval",
+    "answerFormat": "Please express your answer using 3 decimal places.",
+    "answer": "5.096",
+    "explanation": "Margin of Error boundary span parameter resolves directly via algebraic product paths: Z * SE = 1.96 * 2.60 = 5.096 score points.",
+    "chartData": {
+      "mu": 135,
+      "sigma": 2.6,
+      "targetX": null
+    }
+  }
+]
