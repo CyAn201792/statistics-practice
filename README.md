@@ -1,14 +1,14 @@
 # 📊 Basic Statistics Practice
 
-An interactive web application designed to flatten the statistics learning curve for students taking **Quantitative Business Analysis** and core statistical courses.
+An interactive web application designed to help students prepare for **Quantitative Business Analysis** and other core statistical courses.
 
-🔗 **[Launch the App Live](https://github.io)**
+🔗 **[Launch the App Live](https://cyan201792.github.io/statistics-practice/)**
 
 ---
 
 ## 💡 About the Project
 
-After taking a challenging qualification exam for a Quantitative Business Analysis course, I realized how steep the learning curve can be for statistics. I built this interactive tool to break down complex statistical concepts into digestible, actionable steps, making practice much more intuitive.
+After taking a qualification exam for my Quantitative Business Analysis course, I realized how guided practice could help ease the learning curve. I built this interactive tool to walk students through challenging problems step by step, thereby making the learning process more intuitive.
 
 ---
 
@@ -17,16 +17,16 @@ After taking a challenging qualification exam for a Quantitative Business Analys
 ### 🛠️ Dual Learning Modes
 
 - **Guided Tutor Mode:** Breaks down each problem step-by-step, guiding you through the logical path to the solution.
-- **Exam Mode:** Simulates real test conditions by only prompting you for the final answer.
+- **Exam Mode:** Simulates real test conditions by only prompting for the final answer.
 
 ### 📐 Integrated Reference Tables & Dynamic Math Symbols
 
 - **Built-in Tables:** Quick access to essential statistical reference tables: **Cumulative Z**, **Mean-to-Z**, **Student's T**, and **Chi-Square**.
-- **Insert Symbols Palette:** Easily insert standard Greek notation like $\mu$ (mean) and $\sigma$ (standard deviation) directly into your workspace using the built-in palette above the question.
+- **Insert Symbols Palette:** Easily insert standard symbols like mu (mean) and sigma (standard deviation) directly into your workspace using the built-in palette above the question.
 
 ### 📈 Interactive Data Visualizations
 
-Once a problem is successfully solved, the application dynamically plots relevant charts—such as **Normal Distributions** and **Bar Charts**—to provide visual intuition for the numerical answer. _(Note: This feature is a work in progress but is accurate for the majority of questions)._
+Once a problem is successfully solved, the application dynamically plots relevant charts—such as **Normal Distributions** and **Bar Charts**—to provide visual intuition for the answer. _(Note: This feature is a work in progress but is accurate for the majority of questions)._
 
 ### 🎯 Workspace & Customization
 
