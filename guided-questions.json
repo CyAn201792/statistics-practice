@@ -234,11 +234,11 @@
     "prompt": "A charity sells raffle tickets for $15. There is a 1 in 200 chance (0.005) of winning a grand prize of $1,200, and a 5 in 200 chance (0.025) of winning a second-place prize of $200. All other tickets win nothing. From the ticket buyer's perspective, what is the net expected value outcome?",
     "steps": [
       {
-        "label": "Step 1: Calculate the expected value of the grand prize ($1200 * 0.005)",
+        "label": "Step 1: Calculate the expected value of the grand prize.",
         "expected": "6"
       },
       {
-        "label": "Step 2: Calculate the expected value of the second-place prize ($200 * 0.025)",
+        "label": "Step 2: Calculate the expected value of the second-place prize.",
         "expected": "5"
       },
       {
