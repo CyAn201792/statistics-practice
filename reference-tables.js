@@ -73,7 +73,8 @@ const BASE_CELL_CLASSES =
 function createCell(text, extraClasses = "") {
   const td = document.createElement("td");
   td.className = `${BASE_CELL_CLASSES} ${extraClasses}`;
-  td.textContent = text;
+  // Fallback to empty string if text is null/undefined to prevent crashing
+  td.textContent = text !== undefined && text !== null ? text : ""; 
   return td;
 }
 
@@ -85,10 +86,12 @@ function createRow(index) {
 
 function renderSimpleTable(tbodyId, data, columns) {
   const tbody = document.getElementById(tbodyId);
-
   if (!tbody) return;
 
   tbody.innerHTML = "";
+
+  // Safety: If data array somehow missing, stop gracefully
+  if (!data || !Array.isArray(data)) return; 
 
   data.forEach((rowData, index) => {
     const tr = createRow(index);
@@ -96,8 +99,9 @@ function renderSimpleTable(tbodyId, data, columns) {
     columns.forEach((column) => {
       let value = rowData[column.key];
 
-      if (typeof value === "number" && column.decimals !== undefined) {
-        value = value.toFixed(column.decimals);
+      // Safe decimal converting tool
+      if (column.decimals !== undefined && !isNaN(parseFloat(value))) {
+        value = parseFloat(value).toFixed(column.decimals);
       }
 
       tr.appendChild(
@@ -215,7 +219,7 @@ function generateZTable() {
 }
 
 // --------------------------------------------------------------------------
-// Table Navigation
+// Table Navigation (Fixed to re-render dynamically)
 // --------------------------------------------------------------------------
 
 function showTable(tableType) {
@@ -232,12 +236,10 @@ function showTable(tableType) {
 
   document.querySelectorAll(".table-selector-btn").forEach((btn) => {
     btn.classList.remove("bg-indigo-600", "text-white");
-
     btn.classList.add("bg-slate-300", "text-slate-700");
   });
 
   const activeSection = document.getElementById(`${tableType}-content`);
-
   activeSection?.classList.remove("hidden");
 
   const activeButton = [
@@ -245,12 +247,13 @@ function showTable(tableType) {
   ].find((btn) => btn.getAttribute("onclick")?.includes(tableType));
 
   activeButton?.classList.remove("bg-slate-300", "text-slate-700");
-
   activeButton?.classList.add("bg-indigo-600", "text-white");
 
-  if (tableType === "z-table") {
-    generateZTable();
-  }
+  // RE-RENDER TRIGGER: Regenerate the active table dynamically when clicked
+  if (tableType === "z-table") generateZTable();
+  if (tableType === "z-critical") generateZCriticalTable();
+  if (tableType === "t-table") generateTTable();
+  if (tableType === "chi-square") generateChiSquareTable();
 }
 
 // --------------------------------------------------------------------------
