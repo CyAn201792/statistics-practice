@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -75,7 +76,7 @@
       (() => {
         const savedTheme = localStorage.getItem("statsPracticeTheme");
         const prefersDark = window.matchMedia?.(
-          "(prefers-color-scheme: dark)",
+          "(prefers-color-scheme: dark)"
         ).matches;
         if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
           document.documentElement.classList.add("dark");
@@ -94,25 +95,18 @@
           Basic Statistics Practice
         </h1>
       </div>
-
       <div class="flex items-center gap-6 text-sm text-slate-300 font-medium">
         <div class="flex items-center gap-2 border-r border-slate-700 pr-4">
           <span class="text-slate-400">Completed:</span>
-          <span id="metric-completed" class="text-white font-bold font-mono"
-            >0</span
-          >
+          <span id="metric-completed" class="text-white font-bold font-mono">0</span>
         </div>
         <div class="flex items-center gap-2 border-r border-slate-700 pr-4">
           <span class="text-slate-400">Correct Steps:</span>
-          <span id="metric-correct" class="text-emerald-400 font-bold font-mono"
-            >0</span
-          >
+          <span id="metric-correct" class="text-emerald-400 font-bold font-mono">0</span>
         </div>
         <div class="flex items-center gap-2">
           <span class="text-slate-400">Incorrect Attempts:</span>
-          <span id="metric-wrong" class="text-rose-400 font-bold font-mono"
-            >0</span
-          >
+          <span id="metric-wrong" class="text-rose-400 font-bold font-mono">0</span>
         </div>
       </div>
       <button
@@ -124,7 +118,6 @@
         Dark
       </button>
     </header>
-
     <section
       class="bg-white border-b border-slate-200 p-4 shadow-sm dark:bg-slate-900 dark:border-slate-800"
     >
@@ -135,8 +128,9 @@
           <label
             for="category-select"
             class="block text-xs font-bold uppercase tracking-wide text-slate-500 mb-1.5 dark:text-slate-400"
-            >Topic</label
           >
+            Topic
+          </label>
           <select
             id="category-select"
             onchange="applyFilters()"
@@ -144,23 +138,19 @@
           >
             <option value="all">All Topics (41 Questions)</option>
             <option value="weighted_average">Numerical Summary Measures</option>
-            <option value="expected_value">
-              Discrete Probability Distributions
-            </option>
-            <option value="normal_distribution">
-              Continuous Distributions
-            </option>
+            <option value="expected_value">Discrete Probability Distributions</option>
+            <option value="normal_distribution">Continuous Distributions</option>
             <option value="confidence_interval">Confidence Intervals</option>
             <option value="hypothesis_testing">Hypothesis Testing</option>
           </select>
         </div>
-
         <div>
           <label
             for="difficulty-select"
             class="block text-xs font-bold uppercase tracking-wide text-slate-500 mb-1.5 dark:text-slate-400"
-            >Difficulty</label
           >
+            Difficulty
+          </label>
           <select
             id="difficulty-select"
             onchange="applyFilters()"
@@ -172,12 +162,10 @@
             <option value="hard">Hard Level</option>
           </select>
         </div>
-
         <div>
-          <label
-            class="block text-xs font-bold uppercase tracking-wide text-slate-500 mb-1.5 dark:text-slate-400"
-            >Mode</label
-          >
+          <label class="block text-xs font-bold uppercase tracking-wide text-slate-500 mb-1.5 dark:text-slate-400">
+            Mode
+          </label>
           <div
             class="flex bg-slate-100 p-1 rounded border border-slate-300 shadow-inner dark:bg-slate-950 dark:border-slate-700"
           >
@@ -197,7 +185,6 @@
             </button>
           </div>
         </div>
-
         <div class="flex justify-end gap-2">
           <button
             onclick="openReferenceTables()"
@@ -214,53 +201,40 @@
         </div>
       </div>
     </section>
-
     <main
       class="max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 items-start"
     >
       <aside
         class="lg:col-span-3 bg-white border border-slate-200 rounded-lg p-4 shadow-sm dark:bg-slate-900 dark:border-slate-800"
       >
-        <h3
-          class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 pb-2 border-b border-slate-100 dark:border-slate-800"
-        >
+        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 pb-2 border-b border-slate-100 dark:border-slate-800">
           Questions
         </h3>
         <div
           id="question-navigator-grid"
           class="grid grid-cols-5 gap-2 max-h-[280px] overflow-y-auto pr-1"
         ></div>
-        <div
-          class="mt-4 pt-3 border-t border-slate-100 flex flex-col gap-1.5 text-xs text-slate-500 dark:border-slate-800 dark:text-slate-400"
-        >
+        <div class="mt-4 pt-3 border-t border-slate-100 flex flex-col gap-1.5 text-xs text-slate-500 dark:border-slate-800 dark:text-slate-400">
           <div class="flex items-center gap-2">
-            <span class="w-3 h-3 bg-blue-600 rounded"></span> Active Working
-            Module
+            <span class="w-3 h-3 bg-blue-600 rounded"></span> Active Working Module
           </div>
           <div class="flex items-center gap-2">
-            <span
-              class="w-3 h-3 bg-slate-100 border border-slate-300 rounded dark:bg-slate-800 dark:border-slate-600"
-            ></span>
+            <span class="w-3 h-3 bg-slate-100 border border-slate-300 rounded dark:bg-slate-800 dark:border-slate-600"></span>
             Unattempted/Available
           </div>
           <div class="flex items-center gap-2">
-            <span
-              class="w-3 h-3 bg-emerald-50 border border-emerald-200 rounded dark:bg-emerald-950 dark:border-emerald-800"
-            ></span>
+            <span class="w-3 h-3 bg-emerald-50 border border-emerald-200 rounded dark:bg-emerald-950 dark:border-emerald-800"></span>
             Verified Complete
           </div>
         </div>
       </aside>
-
       <section class="lg:col-span-9 flex flex-col gap-6">
         <div
           id="chart-panel"
           class="bg-white border border-slate-200 rounded-lg p-4 shadow-sm dark:bg-slate-900 dark:border-slate-800"
         >
           <div class="flex justify-between items-center mb-2">
-            <h3
-              class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500"
-            >
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
               Visualization
             </h3>
             <span
@@ -272,73 +246,44 @@
             <canvas id="statsChart"></canvas>
           </div>
         </div>
-
         <div
           id="game-container"
           class="bg-white border border-slate-200 rounded-lg p-6 shadow-sm transition-all duration-200 min-h-[300px] dark:bg-slate-900 dark:border-slate-800"
         ></div>
       </section>
     </main>
-
     <div
       id="reference-tables-modal"
       class="hidden fixed inset-0 bg-black bg-opacity-50 z-[100] flex items-center justify-center p-4"
     >
-      <div
-        class="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col dark:bg-slate-900"
-      >
-        <div
-          class="bg-indigo-600 text-white px-6 py-4 flex justify-between items-center"
-        >
+      <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col dark:bg-slate-900">
+        <div class="bg-indigo-600 text-white px-6 py-4 flex justify-between items-center">
           <h2 class="text-lg font-bold">Statistical Reference Tables</h2>
-          <button
-            onclick="closeReferenceTables()"
-            class="text-xl hover:text-indigo-200 transition-colors"
-          >
+          <button onclick="closeReferenceTables()" class="text-xl hover:text-indigo-200 transition-colors">
             ✕
           </button>
         </div>
-
         <div class="overflow-y-auto flex-1">
-          <div
-            class="bg-slate-100 border-b border-slate-200 px-6 py-3 sticky top-0 z-10 dark:bg-slate-950 dark:border-slate-800"
-          >
+          <div class="bg-slate-100 border-b border-slate-200 px-6 py-3 sticky top-0 z-10 dark:bg-slate-950 dark:border-slate-800">
             <div class="flex gap-2 flex-wrap">
-              <button
-                onclick="showTable('z-table')"
-                class="table-selector-btn active px-3 py-1.5 bg-indigo-600 text-white rounded text-xs font-bold transition-colors"
-              >
+              <button onclick="showTable('z-table')" class="table-selector-btn active px-3 py-1.5 bg-indigo-600 text-white rounded text-xs font-bold transition-colors">
                 Z-Table
               </button>
-              <button
-                onclick="showTable('z-critical')"
-                class="table-selector-btn px-3 py-1.5 bg-slate-300 text-slate-700 rounded text-xs font-bold hover:bg-slate-400 transition-colors dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
-              >
+              <button onclick="showTable('z-critical')" class="table-selector-btn px-3 py-1.5 bg-slate-300 text-slate-700 rounded text-xs font-bold hover:bg-slate-400 transition-colors dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700">
                 Z-Critical Values
               </button>
-              <button
-                onclick="showTable('t-table')"
-                class="table-selector-btn px-3 py-1.5 bg-slate-300 text-slate-700 rounded text-xs font-bold hover:bg-slate-400 transition-colors dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
-              >
+              <button onclick="showTable('t-table')" class="table-selector-btn px-3 py-1.5 bg-slate-300 text-slate-700 rounded text-xs font-bold hover:bg-slate-400 transition-colors dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700">
                 T-Table
               </button>
-              <button
-                onclick="showTable('chi-square')"
-                class="table-selector-btn px-3 py-1.5 bg-slate-300 text-slate-700 rounded text-xs font-bold hover:bg-slate-400 transition-colors dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
-              >
+              <button onclick="showTable('chi-square')" class="table-selector-btn px-3 py-1.5 bg-slate-300 text-slate-700 rounded text-xs font-bold hover:bg-slate-400 transition-colors dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700">
                 Chi-Square
               </button>
             </div>
           </div>
-
           <div id="z-table-content" class="p-6 block">
-            <div
-              class="mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-50 p-3 rounded-lg border border-slate-200 dark:bg-slate-950 dark:border-slate-800"
-            >
+            <div class="mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-50 p-3 rounded-lg border border-slate-200 dark:bg-slate-950 dark:border-slate-800">
               <div>
-                <h3
-                  class="text-sm font-bold text-slate-700 dark:text-slate-100"
-                >
+                <h3 class="text-sm font-bold text-slate-700 dark:text-slate-100">
                   Standard Normal Distribution Table
                 </h3>
                 <p class="text-[11px] text-slate-500 dark:text-slate-400">
@@ -346,245 +291,125 @@
                 </p>
               </div>
               <div class="flex items-center gap-2">
-                <label
-                  for="z-table-type"
-                  class="text-xs font-bold text-slate-500 font-mono whitespace-nowrap dark:text-slate-400"
-                  >Format:</label
-                >
+                <label for="z-table-type" class="text-xs font-bold text-slate-500 font-mono whitespace-nowrap dark:text-slate-400">
+                  Format:
+                </label>
                 <select
                   id="z-table-type"
                   onchange="generateZTable()"
                   class="bg-white border border-slate-300 rounded px-2 py-1 text-xs font-bold font-mono text-slate-700 shadow-sm focus:outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer dark:bg-slate-900 dark:border-slate-700 dark:text-slate-100"
                 >
-                  <option value="cumulative">
-                    Cumulative Left-Tail [P(Z ≤ z)]
-                  </option>
-                  <option value="meanToZ">
-                    Mean-to-Z [Area from Mean to Z]
-                  </option>
+                  <option value="cumulative">Cumulative Left-Tail [P(Z ≤ z)]</option>
+                  <option value="meanToZ">Area from Mean to Z</option>
                 </select>
               </div>
             </div>
-
-            <div
-              class="overflow-x-auto max-h-[420px] border border-slate-300 rounded shadow-inner dark:border-slate-700"
-            >
+            <div class="overflow-x-auto max-h-[420px] border border-slate-300 rounded shadow-inner dark:border-slate-700">
               <table class="w-full border-collapse text-xs font-mono">
-                <thead
-                  class="bg-slate-200 sticky top-0 border-b border-slate-300 z-10 shadow-sm dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100"
-                >
+                <thead class="bg-slate-200 sticky top-0 border-b border-slate-300 z-10 shadow-sm dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100">
                   <tr>
-                    <th
-                      class="border border-slate-300 p-2 text-center font-bold bg-slate-200 sticky left-0 dark:bg-slate-800 dark:border-slate-700"
-                    >
+                    <th class="border border-slate-300 p-2 text-center font-bold bg-slate-200 sticky left-0 dark:bg-slate-800 dark:border-slate-700">
                       z
                     </th>
-                    <th
-                      class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700"
-                    >
-                      0.00
-                    </th>
-                    <th
-                      class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700"
-                    >
-                      0.01
-                    </th>
-                    <th
-                      class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700"
-                    >
-                      0.02
-                    </th>
-                    <th
-                      class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700"
-                    >
-                      0.03
-                    </th>
-                    <th
-                      class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700"
-                    >
-                      0.04
-                    </th>
-                    <th
-                      class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700"
-                    >
-                      0.05
-                    </th>
-                    <th
-                      class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700"
-                    >
-                      0.06
-                    </th>
-                    <th
-                      class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700"
-                    >
-                      0.07
-                    </th>
-                    <th
-                      class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700"
-                    >
-                      0.08
-                    </th>
-                    <th
-                      class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700"
-                    >
-                      0.09
-                    </th>
+                    <th class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700">0.00</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700">0.01</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700">0.02</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700">0.03</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700">0.04</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700">0.05</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700">0.06</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700">0.07</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700">0.08</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700">0.09</th>
                   </tr>
                 </thead>
-                <tbody
-                  id="z-table-body"
-                  class="bg-white divide-y divide-slate-100 dark:bg-slate-900 dark:divide-slate-800"
-                ></tbody>
+                <tbody id="z-table-body" class="bg-white divide-y divide-slate-100 dark:bg-slate-900 dark:divide-slate-800"></tbody>
               </table>
             </div>
           </div>
-
           <div id="z-critical-content" class="p-6 hidden">
-            <h3
-              class="text-sm font-bold text-slate-700 mb-3 dark:text-slate-100"
-            >
+            <h3 class="text-sm font-bold text-slate-700 mb-3 dark:text-slate-100">
               Critical Z-Values for Common Confidence Levels
             </h3>
             <div class="overflow-x-auto">
-              <table
-                class="w-full border-collapse text-xs font-mono border border-slate-300 dark:border-slate-700"
-              >
-                <thead
-                  class="bg-slate-200 dark:bg-slate-800 dark:text-slate-100"
-                >
+              <table class="w-full border-collapse text-xs font-mono border border-slate-300 dark:border-slate-700">
+                <thead class="bg-slate-200 dark:bg-slate-800 dark:text-slate-100">
                   <tr>
-                    <th class="border border-slate-300 p-2 text-left font-bold">
-                      Confidence Level
-                    </th>
-                    <th
-                      class="border border-slate-300 p-2 text-center font-bold"
-                    >
-                      Alpha (α)
-                    </th>
-                    <th
-                      class="border border-slate-300 p-2 text-center font-bold"
-                    >
-                      Z-Critical (Two-Tailed)
-                    </th>
-                    <th
-                      class="border border-slate-300 p-2 text-center font-bold"
-                    >
-                      Z-Critical (One-Tailed)
-                    </th>
+                    <th class="border border-slate-300 p-2 text-left font-bold">Confidence Level</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold">Alpha (α)</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold">Z-Critical (Two-Tailed)</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold">Z-Critical (One-Tailed)</th>
                   </tr>
                 </thead>
-                <tbody
-                  id="z-critical-body"
-                  class="bg-white dark:bg-slate-900"
-                ></tbody>
+                <tbody id="z-critical-body" class="bg-white dark:bg-slate-900"></tbody>
               </table>
             </div>
           </div>
-
           <div id="t-table-content" class="p-6 hidden">
-            <h3
-              class="text-sm font-bold text-slate-700 mb-3 dark:text-slate-100"
-            >
+            <h3 class="text-sm font-bold text-slate-700 mb-3 dark:text-slate-100">
               Student's T-Distribution Critical Values
             </h3>
             <p class="text-xs text-slate-600 mb-4 dark:text-slate-400">
               Two-tailed test values for common degrees of freedom
             </p>
             <div class="overflow-x-auto">
-              <table
-                class="w-full border-collapse text-xs font-mono border border-slate-300 dark:border-slate-700"
-              >
-                <thead
-                  class="bg-slate-200 dark:bg-slate-800 dark:text-slate-100"
-                >
+              <table class="w-full border-collapse text-xs font-mono border border-slate-300 dark:border-slate-700">
+                <thead class="bg-slate-200 dark:bg-slate-800 dark:text-slate-100">
                   <tr>
-                    <th class="border border-slate-300 p-2 text-left font-bold">
+                    <th
+                      rowspan="2"
+                      class="border border-slate-300 p-2 text-left font-bold align-middle"
+                    >
                       df
                     </th>
                     <th
+                      colspan="10"
                       class="border border-slate-300 p-2 text-center font-bold"
                     >
-                      90%
-                    </th>
-                    <th
-                      class="border border-slate-300 p-2 text-center font-bold"
-                    >
-                      95%
-                    </th>
-                    <th
-                      class="border border-slate-300 p-2 text-center font-bold"
-                    >
-                      98%
-                    </th>
-                    <th
-                      class="border border-slate-300 p-2 text-center font-bold"
-                    >
-                      99%
+                      One-Tail Probability
                     </th>
                   </tr>
+                  <tr>
+                    <th class="border border-slate-300 p-2 text-center font-bold">0.25</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold">0.20</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold">0.15</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold">0.10</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold">0.05</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold">0.025</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold">0.01</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold">0.005</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold">0.001</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold">0.0005</th>
+                  </tr>
                 </thead>
-                <tbody
-                  id="t-table-body"
-                  class="bg-white dark:bg-slate-900"
-                ></tbody>
+                <tbody id="t-table-body" class="bg-white dark:bg-slate-900"></tbody>
               </table>
             </div>
           </div>
-
           <div id="chi-square-content" class="p-6 hidden">
-            <h3
-              class="text-sm font-bold text-slate-700 mb-3 dark:text-slate-100"
-            >
+            <h3 class="text-sm font-bold text-slate-700 mb-3 dark:text-slate-100">
               Chi-Square Distribution Critical Values
             </h3>
             <p class="text-xs text-slate-600 mb-4 dark:text-slate-400">
               Right-tail critical values for common degrees of freedom
             </p>
             <div class="overflow-x-auto">
-              <table
-                class="w-full border-collapse text-xs font-mono border border-slate-300 dark:border-slate-700"
-              >
-                <thead
-                  class="bg-slate-200 dark:bg-slate-800 dark:text-slate-100"
-                >
+              <table class="w-full border-collapse text-xs font-mono border border-slate-300 dark:border-slate-700">
+                <thead class="bg-slate-200 dark:bg-slate-800 dark:text-slate-100">
                   <tr>
-                    <th class="border border-slate-300 p-2 text-left font-bold">
-                      df
-                    </th>
-                    <th
-                      class="border border-slate-300 p-2 text-center font-bold"
-                    >
-                      90%
-                    </th>
-                    <th
-                      class="border border-slate-300 p-2 text-center font-bold"
-                    >
-                      95%
-                    </th>
-                    <th
-                      class="border border-slate-300 p-2 text-center font-bold"
-                    >
-                      98%
-                    </th>
-                    <th
-                      class="border border-slate-300 p-2 text-center font-bold"
-                    >
-                      99%
-                    </th>
+                    <th class="border border-slate-300 p-2 text-left font-bold">df</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold">90%</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold">95%</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold">98%</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold">99%</th>
                   </tr>
                 </thead>
-                <tbody
-                  id="chi-square-body"
-                  class="bg-white dark:bg-slate-900"
-                ></tbody>
+                <tbody id="chi-square-body" class="bg-white dark:bg-slate-900"></tbody>
               </table>
             </div>
           </div>
         </div>
-
-        <div
-          class="bg-slate-50 border-t border-slate-200 px-6 py-3 flex justify-end dark:bg-slate-950 dark:border-slate-800"
-        >
+        <div class="bg-slate-50 border-t border-slate-200 px-6 py-3 flex justify-end dark:bg-slate-950 dark:border-slate-800">
           <button
             onclick="closeReferenceTables()"
             class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded text-sm font-bold transition-colors dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200"
@@ -594,7 +419,6 @@
         </div>
       </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/mathjs@12/lib/browser/math.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="app.js"></script>
