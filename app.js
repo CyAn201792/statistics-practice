@@ -363,7 +363,18 @@ function renderQuestionCard() {
                                     dark:bg-slate-900 dark:text-slate-100 dark:border-slate-700"
                             />
                             
-                            ${isCurrent ? `<button onclick="submitStep(${index})" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded shadow-sm transition-colors cursor-pointer uppercase tracking-wider h-12">Check My Work</button>` : ""}
+                            ${isCurrent ? `
+                             <button 
+                             onclick="submitStep(${index})"
+                             class="px-2 sm:px-3 py-2 bg-blue-600 hover:bg-blue-700 
+                             text-white font-bold text-[10px] sm:text-xs 
+                             mrounded shadow-sm transition-colors cursor-pointer 
+                             uppercase tracking-wide text-center 
+                             whitespace-normal break-words min-h-[3rem]"
+                             >
+                             Check My Work
+                             </button>
+                             ` : ""}
                             ${isPast ? `<span class="text-emerald-600 font-bold text-xs uppercase tracking-wider font-mono flex items-center gap-1 dark:text-emerald-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg> Correct</span>` : ""}
                         </div>
                     </div>
