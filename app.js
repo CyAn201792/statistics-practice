@@ -368,7 +368,7 @@ function renderQuestionCard() {
                              onclick="submitStep(${index})"
                              class="px-2 sm:px-3 py-2 bg-blue-600 hover:bg-blue-700 
                              text-white font-bold text-[10px] sm:text-xs 
-                             mrounded shadow-sm transition-colors cursor-pointer 
+                             rounded shadow-sm transition-colors cursor-pointer 
                              uppercase tracking-wide text-center 
                              whitespace-normal break-words min-h-[3rem]"
                              >
