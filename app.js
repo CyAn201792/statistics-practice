@@ -702,7 +702,7 @@ function approxEqual(userInput, expectedAnswer, tolerance = 0.05) {
         .toLowerCase()
         .replace(/h0/g, "h0")
         .replace(/h₀/g, "h0")
-        .replace(/[^\w\s]/g, "")
+        .replace(/[^\p{L}\p{N}\s]/gu, "")
         .replace(/\s+/g, " ")
         .trim();
     }
