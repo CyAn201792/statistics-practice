@@ -3,10 +3,10 @@
     "id": 1,
     "difficulty": "Easy",
     "type": "normal_distribution_probability",
-    "prompt": "The monthly electricity bill for households in a city is normally distributed with a mean (μ) of $120 and a standard deviation (σ) of $25. Find the probability that a randomly selected household has a bill of less than $95.",
+    "prompt": "The monthly electricity bill for households in a city is normally distributed with a mean (μ) of $120 and a standard deviation of $25. Find the probability that a randomly selected household has a bill of less than $95.",
     "steps": [
       {
-        "label": "Step 1: State the given values: mean (μ), standard deviation (σ), and value (X). Use the format: mean, standard deviation, value.",
+        "label": "Step 1: State the given values: mean (μ), standard deviation, and value (X). Use the format: mean, standard deviation, value.",
         "expected": "120, 25, 95"
       },
       {
@@ -77,7 +77,7 @@
     "id": 4,
     "difficulty": "Easy",
     "type": "hypothesis_testing_z",
-    "prompt": "An internet service provider claims their average download speed is at least 100 Mbps. A consumer group tests 36 households and finds a sample mean speed of 94 Mbps with a known population standard deviation (σ) of 18 Mbps. Calculate the test statistic (Z-score) for this sample mean.",
+    "prompt": "An internet service provider claims their average download speed is at least 100 Mbps. A consumer group tests 36 households and finds a sample mean speed of 94 Mbps with a known population standard deviation of 18 Mbps. Calculate the test statistic (Z-score) for this sample mean.",
     "steps": [
       {
         "label": "Step 1: State the sample size (n) and standard deviation (s) in the format: sample size, standard deviation",
@@ -260,7 +260,7 @@
     "prompt": "The lifespan of a commercial cooling fan is normally distributed with a mean of 8.0 years and a standard deviation of 1.5 years. What is the probability (expressed as a decimal rounded to four places) that a randomly selected unit will break down in less than 5.6 years?",
     "steps": [
       {
-        "label": "Step 1: State the given values: mean (μ), standard deviation (σ), and value (X) in the following format: mean, standard deviation, value",
+        "label": "Step 1: State the given values: mean (μ), standard deviation, and value (X) in the following format: mean, standard deviation, value",
         "expected": "8.0, 1.5, 5.6"
       },
       {
@@ -290,7 +290,7 @@
     "prompt": "Commute times on a rail line are normally distributed with a mean of 34 minutes and a standard deviation of 4 minutes. The transit authority wants to identify the slowest 10% of commutes for a system review. What is the minimum threshold time in minutes (rounded to two decimal places) to be included in this slowest 10%?",
     "steps": [
       {
-        "label": "Step 1: State the given values: mean (μ) and standard deviation (σ) in the following format: mean, standard deviation",
+        "label": "Step 1: State the given values: mean (μ) and standard deviation in the following format: mean, standard deviation",
         "expected": "34, 4"
       },
       {
@@ -316,7 +316,7 @@
     "prompt": "An engineering test has scores normally distributed with a mean of 70 and a standard deviation of 10. The top 10% of scorers receive an honors certificate. If the critical Z-score for the top 10% is 1.28, what score must a student achieve?",
     "steps": [
       {
-        "label": "Step 1: State the given values: mean (μ) and standard deviation (σ) in the following format: mean, standard deviation",
+        "label": "Step 1: State the given values: mean (μ) and standard deviation in the following format: mean, standard deviation",
         "expected": "70, 10"
       },
       {
@@ -565,7 +565,7 @@
     "id": 24,
     "difficulty": "Hard",
     "type": "hypothesis_testing_aerospace_threshold",
-    "prompt": "The historical mean operational breakdown threshold temperature for an aerospace component is 192.74°C with a known population standard deviation (σ) of 6.5°C. A quality control engineer suspects a new production batch is underperforming and breaking down at lower temperatures. A random sample of 100 components from the new batch is tested, yielding a sample mean breakdown temperature of 191.44°C. Conduct a one-tailed Z-test at a 2.5% significance level (α = 0.025) to determine if the new batch is significantly underperforming.",
+    "prompt": "The historical mean operational breakdown threshold temperature for an aerospace component is 192.74°C with a known population standard deviation of 6.5°C. A quality control engineer suspects a new production batch is underperforming and breaking down at lower temperatures. A random sample of 100 components from the new batch is tested, yielding a sample mean breakdown temperature of 191.44°C. Conduct a one-tailed Z-test at a 2.5% significance level (α = 0.025) to determine if the new batch is significantly underperforming.",
     "steps": [
       {
         "label": "Step 1: Calculate the standard error of the mean using the formula σ / √n. Please express your answer using 2 decimal places.",
@@ -599,14 +599,14 @@
     "id": 25,
     "difficulty": "Hard",
     "type": "normal_distribution_find_sd",
-    "prompt": "The concrete cure timeframe metrics for a commercial building site are normally distributed with an expected population average mean timeline of 24.0 hours. Field quality evaluations confirm that exactly 10% of batches take longer than 28.5 hours to set completely. Find the required standard deviation (σ) parameter.",
+    "prompt": "The concrete cure timeframe metrics for a commercial building site are normally distributed with an expected population average mean timeline of 24.0 hours. Field quality evaluations confirm that exactly 10% of batches take longer than 28.5 hours to set completely. Find the required standard deviation parameter.",
     "steps": [
       {
         "label": "Step 1: Use the formula z-score = (Observed value - Mean) / Standard Deviation. First, Find the z-score for the 90th percentile (top 10% cutoff point) using z-table. Please express your answer using 2 decimal places.",
         "expected": "1.28"
       },
       {
-        "label": "Step 2: Rearrange the formula to solve for standard deviation (σ) and substitute the known values. Please express your answer using 2 decimal places.",
+        "label": "Step 2: Rearrange the formula to solve for standard deviation and substitute the known values. Please express your answer using 2 decimal places.",
         "expected": "3.52"
       }
     ],
@@ -845,7 +845,7 @@
     "id": 34,
     "difficulty": "Intermediate",
     "type": "hypothesis_testing_one_mean_z_test",
-    "prompt": "Historical distribution logistics show that a warehouse sells a population average mean of 1,800 gallons of premium paint per month with a known population standard deviation (σ) of 300 gallons. The store manager claims that a recent contractor promotion has significantly increased monthly paint sales. A random sample of 36 months following the promotion yields a sample mean sales volume of 1,920 gallons. Test the manager's claim at a 5% significance level (α = 0.05).",
+    "prompt": "Historical distribution logistics show that a warehouse sells a population average mean of 1,800 gallons of premium paint per month with a known population standard deviation of 300 gallons. The store manager claims that a recent contractor promotion has significantly increased monthly paint sales. A random sample of 36 months following the promotion yields a sample mean sales volume of 1,920 gallons. Test the manager's claim at a 5% significance level (α = 0.05).",
     "steps": [
       {
         "label": "Step 1: State the null hypothesis (H₀) regarding the population mean sales (μ). Please type H₀ for the null hypothesis and use the standard equality sign. Use mu to represent the mean symbol.",
@@ -905,7 +905,7 @@
     "id": 36,
     "difficulty": "Hard",
     "type": "normal_distribution_prof_curve",
-    "prompt": "Based on continuous academic curves: A professor establishes that her class grades possess a standard deviation (σ) of 4%. She awards an 'A' grade to only the top 8% of her class. If her 'A' grade threshold cutoff boundary score line lands at exactly 86.0%, find the population mean score (μ) of this distribution.",
+    "prompt": "Based on continuous academic curves: A professor establishes that her class grades possess a standard deviation of 4%. She awards an 'A' grade to only the top 8% of her class. If her 'A' grade threshold cutoff boundary score line lands at exactly 86.0%, find the population mean score (μ) of this distribution.",
     "steps": [
       {
         "label": "Step 1: Start with the formula z-score = (observed value - μ)/σ. First, find the z-score for the top 8% cutoff point (92nd percentile) using the Z-table. Please express your answer using 2 decimal places.",
@@ -949,7 +949,7 @@
     "id": 38,
     "difficulty": "Hard",
     "type": "hypothesis_testing_one_mean_z_test",
-    "prompt": "Based on commission performance tracking systems, weekly sales outputs historically follow a normal distribution with a population mean of 25 completed transactions and a population standard deviation (σ) of 8 transactions. A regional manager implements a new training program and claims it significantly increases the team's weekly output. A random sample of 16 sales representatives under the new program yields a sample mean of 29.1 completed transactions. Test the manager's claim at a 5% significance level (α = 0.05).",
+    "prompt": "Based on commission performance tracking systems, weekly sales outputs historically follow a normal distribution with a population mean of 25 completed transactions and a population standard deviation of 8 transactions. A regional manager implements a new training program and claims it significantly increases the team's weekly output. A random sample of 16 sales representatives under the new program yields a sample mean of 29.1 completed transactions. Test the manager's claim at a 5% significance level (α = 0.05).",
     "steps": [
       {
         "label": "Step 1: State the null hypothesis (H₀) regarding the team's true population mean output (μ). Type H₀ for the null hypothesis, use a standard equality sign, and use the mean symbol (μ) in the insert symbols palette to represent the mean.",
