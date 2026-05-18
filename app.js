@@ -490,7 +490,7 @@ function submitStep(stepIdx) {
   if (approxEqual(userInput, stepData.expected)) {
     showFeedback(
       feedbackEl,
-      "✓ Perfect. Calculation verified successfully.",
+      "✓ Perfect!",
       "text-emerald-600",
     );
     totalCorrectSteps++;
@@ -520,7 +520,7 @@ function submitStep(stepIdx) {
     updateMetricsDisplay();
     showFeedback(
       feedbackEl,
-      "✕ Discrepancy detected. Review values or operators.",
+      "✕ Incorrect. Please try again.",
       "text-rose-600",
     );
     cardEl.classList.add(
