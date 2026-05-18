@@ -15,8 +15,58 @@ let totalQuestionsCompleted = 0;
 let totalCorrectSteps = 0;
 let totalWrongAttempts = 0;
 
+// ==========================================
+// 💾 LOCAL STORAGE KEYS
+// ==========================================
+const LS_KEYS = {
+  ANSWERS: "statsAnsweredQuestions",
+  METRICS: "statsMetrics",
+};
+
+// ==========================================
+// 💾 LOAD SAVED STATE
+// ==========================================
+function loadPersistedState() {
+  try {
+    const savedAnswers = localStorage.getItem(LS_KEYS.ANSWERS);
+    const savedMetrics = localStorage.getItem(LS_KEYS.METRICS);
+
+    if (savedAnswers) {
+      answeredQuestionsMap = JSON.parse(savedAnswers);
+    }
+
+    if (savedMetrics) {
+      const m = JSON.parse(savedMetrics);
+      totalQuestionsCompleted = m.completed ?? 0;
+      totalCorrectSteps = m.correct ?? 0;
+      totalWrongAttempts = m.wrong ?? 0;
+    }
+  } catch (err) {
+    console.warn("Failed to load persisted state:", err);
+  }
+}
+
+// ==========================================
+// 💾 SAVE STATE
+// ==========================================
+function saveAnsweredMap() {
+  localStorage.setItem(LS_KEYS.ANSWERS, JSON.stringify(answeredQuestionsMap));
+}
+
+function saveMetrics() {
+  localStorage.setItem(
+    LS_KEYS.METRICS,
+    JSON.stringify({
+      completed: totalQuestionsCompleted,
+      correct: totalCorrectSteps,
+      wrong: totalWrongAttempts,
+    }),
+  );
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   applyStoredTheme();
+  loadPersistedState();
 
   // Fetch separate question sets for each practice mode.
   try {
@@ -42,6 +92,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
+  updateMetricsDisplay();
   applyFilters();
 });
 
@@ -168,9 +219,15 @@ function resetPerformanceCounters() {
   totalCorrectSteps = 0;
   totalWrongAttempts = 0;
   answeredQuestionsMap = {};
+
+  // 🔥 clear storage too
+  localStorage.removeItem(LS_KEYS.ANSWERS);
+  localStorage.removeItem(LS_KEYS.METRICS);
+
   document.getElementById("metric-completed").textContent = "0";
   document.getElementById("metric-correct").textContent = "0";
   document.getElementById("metric-wrong").textContent = "0";
+
   applyFilters();
 }
 
@@ -363,7 +420,9 @@ function renderQuestionCard() {
                                     dark:bg-slate-900 dark:text-slate-100 dark:border-slate-700"
                             />
                             
-                            ${isCurrent ? `
+                            ${
+                              isCurrent
+                                ? `
                              <button 
                              onclick="submitStep(${index})"
                              class="px-2 sm:px-3 py-2 bg-blue-600 hover:bg-blue-700 
@@ -374,7 +433,9 @@ function renderQuestionCard() {
                              >
                              Check My Work
                              </button>
-                             ` : ""}
+                             `
+                                : ""
+                            }
                             ${isPast ? `<span class="text-emerald-600 font-bold text-xs uppercase tracking-wider font-mono flex items-center gap-1 dark:text-emerald-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg> Correct</span>` : ""}
                         </div>
                     </div>
@@ -488,14 +549,11 @@ function submitStep(stepIdx) {
     );
 
   if (approxEqual(userInput, stepData.expected)) {
-    showFeedback(
-      feedbackEl,
-      "✓ Perfect!",
-      "text-emerald-600",
-    );
+    showFeedback(feedbackEl, "✓ Perfect!", "text-emerald-600");
     totalCorrectSteps++;
     currentStepIndex++;
     updateMetricsDisplay();
+    saveMetrics();
 
     if (currentStepIndex < currentQuestion.steps.length) {
       setTimeout(() => {
@@ -506,6 +564,10 @@ function submitStep(stepIdx) {
         totalQuestionsCompleted++;
         answeredQuestionsMap[getQuestionProgressKey(currentQuestion)] = true;
         updateMetricsDisplay();
+
+        saveAnsweredMap();
+        saveMetrics();
+
         renderNavigatorGrid();
         document.getElementById("explanation-box").classList.remove("hidden");
         setChartPanelVisible(true);
@@ -518,11 +580,8 @@ function submitStep(stepIdx) {
   } else {
     totalWrongAttempts++;
     updateMetricsDisplay();
-    showFeedback(
-      feedbackEl,
-      "✕ Incorrect. Please try again.",
-      "text-rose-600",
-    );
+    saveMetrics();
+    showFeedback(feedbackEl, "✕ Incorrect. Please try again.", "text-rose-600");
     cardEl.classList.add(
       "animate-shake",
       "border-rose-300",
@@ -585,6 +644,10 @@ function submitExamAnswer() {
     answeredQuestionsMap[getQuestionProgressKey(currentQuestion)] = true;
 
     updateMetricsDisplay();
+
+    saveAnsweredMap();
+    saveMetrics();
+
     renderNavigatorGrid();
 
     document.getElementById("explanation-box")?.classList.remove("hidden");
@@ -606,6 +669,7 @@ function submitExamAnswer() {
   totalWrongAttempts++;
 
   updateMetricsDisplay();
+  saveMetrics();
 
   showFeedback(feedbackEl, "❌ Not quite! Try again.", "error");
 

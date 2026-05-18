@@ -6,6 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
+    <link rel="stylesheet" href="style.css" />
     <title>Basic Statistics Practice</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -18,108 +19,12 @@
 
     <script src="https://unpkg.com/mathlive"></script>
 
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Inter:wght=400;500;600;700&display=swap");
-
-      * {
-        box-sizing: border-box;
-      }
-
-      html,
-      body {
-        overflow-x: hidden;
-      }
-
-      body {
-        font-family: "Inter", sans-serif;
-      }
-
-      @keyframes shake {
-        0%,
-        100% {
-        transform: translateX(0);
-        }
-
-        20%,
-        60% {
-        transform: translateX(-4px);
-        }
-
-        40%,
-        80% {
-        transform: translateX(4px);
-        }
-      }
-
-        .animate-shake {
-        animation: shake 0.35s ease-in-out;
-      }
-
-      /* Mobile responsiveness improvements */
-      .mobile-scroll {
-        -webkit-overflow-scrolling: touch;
-      }
-
-      @media (max-width: 768px) {
-        table {
-          min-width: 700px;
-        }
-
-        math-field {
-          width: 100% !important;
-          min-width: 0 !important;
-        }
-      }
-
-      /* Custom overrides to make MathLive math-fields look completely uniform with Tailwind styling scales */
-      math-field {
-        font-size: 14px !important;
-        background-color: #ffffff !important;
-        border: 1px solid #cbd5e1 !important;
-        border-radius: 0.25rem !important;
-        padding: 0.375rem 0.75rem !important;
-        outline: none !important;
-        transition: all 0.15s ease-in-out;
-      }
-
-      math-field:focus-within {
-        border-color: #2563eb !important;
-        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2) !important;
-      }
-
-      .dark math-field {
-        background-color: #0f172a !important;
-        border-color: #475569 !important;
-        color: #e2e8f0 !important;
-      }
-
-      .dark math-field:focus-within {
-        border-color: #60a5fa !important;
-        box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.25) !important;
-      }
-
-      math-field[disabled] {
-        background-color: #f8fafc !important;
-        opacity: 0.6 !important;
-        pointer-events: none !important;
-      }
-
-      .dark math-field[disabled] {
-        background-color: #020617 !important;
-      }
-
-      .dark #reference-tables-modal th,
-      .dark #reference-tables-modal td {
-        border-color: #334155 !important;
-      }
-    </style>
-
     <script>
       (() => {
         const savedTheme = localStorage.getItem("statsPracticeTheme");
 
         const prefersDark = window.matchMedia?.(
-          "(prefers-color-scheme: dark)"
+          "(prefers-color-scheme: dark)",
         ).matches;
 
         if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
@@ -154,9 +59,7 @@
         >
           <span class="text-slate-400">Completed:</span>
 
-          <span
-            id="metric-completed"
-            class="text-white font-bold font-mono"
+          <span id="metric-completed" class="text-white font-bold font-mono"
             >0</span
           >
         </div>
@@ -166,9 +69,7 @@
         >
           <span class="text-slate-400">Correct Steps:</span>
 
-          <span
-            id="metric-correct"
-            class="text-emerald-400 font-bold font-mono"
+          <span id="metric-correct" class="text-emerald-400 font-bold font-mono"
             >0</span
           >
         </div>
@@ -218,9 +119,7 @@
           >
             <option value="all">All Topics (41 Questions)</option>
 
-            <option value="weighted_average">
-              Numerical Summary Measures
-            </option>
+            <option value="weighted_average">Numerical Summary Measures</option>
 
             <option value="expected_value">
               Discrete Probability Distributions
@@ -230,13 +129,9 @@
               Continuous Distributions
             </option>
 
-            <option value="confidence_interval">
-              Confidence Intervals
-            </option>
+            <option value="confidence_interval">Confidence Intervals</option>
 
-            <option value="hypothesis_testing">
-              Hypothesis Testing
-            </option>
+            <option value="hypothesis_testing">Hypothesis Testing</option>
           </select>
         </div>
 
@@ -303,8 +198,15 @@
           </button>
 
           <button
+            onclick="openCalculator()"
+            class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs uppercase tracking-wider font-bold rounded shadow-sm transition-colors cursor-pointer border border-emerald-700"
+          >
+            Calculator
+          </button>
+
+          <button
             onclick="resetPerformanceCounters()"
-            class="w-full py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs uppercase tracking-wider font-bold rounded shadow-sm transition-colors cursor-pointer border border-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200 dark:border-slate-700"
+            class="w-full py-2.5 bg-red-500 hover:bg-red-600 text-white text-xs uppercase tracking-wider font-bold rounded shadow-sm transition-colors cursor-pointer border border-red-700 dark:bg-red-900 dark:hover:bg-red-800 dark:text-red-200 dark:border-red-700"
           >
             Reset Statistics
           </button>
@@ -317,8 +219,9 @@
       class="max-w-7xl w-full mx-auto p-3 sm:p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6 flex-1 items-start"
     >
       <!-- SIDEBAR -->
+
       <aside
-        class="lg:col-span-3 bg-white border border-slate-200 rounded-lg p-4 shadow-sm dark:bg-slate-900 dark:border-slate-800"
+        class="lg:col-span-3 bg-white border border-slate-200 rounded-lg p-4 shadow-sm dark:bg-slate-900 dark:border-slate-800 neon-widget"
       >
         <h3
           class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 pb-2 border-b border-slate-100 dark:border-slate-800"
@@ -363,7 +266,7 @@
         <!-- CHART -->
         <div
           id="chart-panel"
-          class="bg-white border border-slate-200 rounded-lg p-3 sm:p-4 shadow-sm dark:bg-slate-900 dark:border-slate-800"
+          class="bg-white border border-slate-200 rounded-lg p-3 sm:p-4 shadow-sm dark:bg-slate-900 dark:border-slate-800 neon-widget"
         >
           <div
             class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-3"
@@ -388,7 +291,7 @@
         <!-- GAME -->
         <div
           id="game-container"
-          class="bg-white border border-slate-200 rounded-lg p-4 sm:p-5 md:p-6 shadow-sm transition-all duration-200 min-h-[300px] overflow-x-auto dark:bg-slate-900 dark:border-slate-800"
+          class="bg-white border border-slate-200 rounded-lg p-4 sm:p-5 md:p-6 shadow-sm transition-all duration-200 min-h-[300px] overflow-x-auto dark:bg-slate-900 dark:border-slate-800 neon-widget"
         ></div>
       </section>
     </main>
@@ -454,9 +357,13 @@
             </div>
           </div>
           <div id="z-table-content" class="p-6 block">
-            <div class="mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-50 p-3 rounded-lg border border-slate-200 dark:bg-slate-950 dark:border-slate-800">
+            <div
+              class="mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-50 p-3 rounded-lg border border-slate-200 dark:bg-slate-950 dark:border-slate-800"
+            >
               <div>
-                <h3 class="text-sm font-bold text-slate-700 dark:text-slate-100">
+                <h3
+                  class="text-sm font-bold text-slate-700 dark:text-slate-100"
+                >
                   Standard Normal Distribution Table
                 </h3>
                 <p class="text-[11px] text-slate-500 dark:text-slate-400">
@@ -464,7 +371,10 @@
                 </p>
               </div>
               <div class="flex items-center gap-2">
-                <label for="z-table-type" class="text-xs font-bold text-slate-500 font-mono whitespace-nowrap dark:text-slate-400">
+                <label
+                  for="z-table-type"
+                  class="text-xs font-bold text-slate-500 font-mono whitespace-nowrap dark:text-slate-400"
+                >
                   Format:
                 </label>
                 <select
@@ -472,62 +382,142 @@
                   onchange="generateZTable()"
                   class="bg-white border border-slate-300 rounded px-2 py-1 text-xs font-bold font-mono text-slate-700 shadow-sm focus:outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer dark:bg-slate-900 dark:border-slate-700 dark:text-slate-100"
                 >
-                  <option value="cumulative">Cumulative Left-Tail [P(Z ≤ z)]</option>
+                  <option value="cumulative">
+                    Cumulative Left-Tail [P(Z ≤ z)]
+                  </option>
                   <option value="meanToZ">Area from Mean to Z</option>
                 </select>
               </div>
             </div>
-            <div class="overflow-x-auto max-h-[420px] border border-slate-300 rounded shadow-inner dark:border-slate-700">
+            <div
+              class="overflow-x-auto max-h-[420px] border border-slate-300 rounded shadow-inner dark:border-slate-700"
+            >
               <table class="w-full border-collapse text-xs font-mono">
-                <thead class="bg-slate-200 sticky top-0 border-b border-slate-300 z-10 shadow-sm dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100">
+                <thead
+                  class="bg-slate-200 sticky top-0 border-b border-slate-300 z-10 shadow-sm dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100"
+                >
                   <tr>
-                    <th class="border border-slate-300 p-2 text-center font-bold bg-slate-200 sticky left-0 dark:bg-slate-800 dark:border-slate-700">
+                    <th
+                      class="border border-slate-300 p-2 text-center font-bold bg-slate-200 sticky left-0 dark:bg-slate-800 dark:border-slate-700"
+                    >
                       z
                     </th>
-                    <th class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700">0.00</th>
-                    <th class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700">0.01</th>
-                    <th class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700">0.02</th>
-                    <th class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700">0.03</th>
-                    <th class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700">0.04</th>
-                    <th class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700">0.05</th>
-                    <th class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700">0.06</th>
-                    <th class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700">0.07</th>
-                    <th class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700">0.08</th>
-                    <th class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700">0.09</th>
+                    <th
+                      class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700"
+                    >
+                      0.00
+                    </th>
+                    <th
+                      class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700"
+                    >
+                      0.01
+                    </th>
+                    <th
+                      class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700"
+                    >
+                      0.02
+                    </th>
+                    <th
+                      class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700"
+                    >
+                      0.03
+                    </th>
+                    <th
+                      class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700"
+                    >
+                      0.04
+                    </th>
+                    <th
+                      class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700"
+                    >
+                      0.05
+                    </th>
+                    <th
+                      class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700"
+                    >
+                      0.06
+                    </th>
+                    <th
+                      class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700"
+                    >
+                      0.07
+                    </th>
+                    <th
+                      class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700"
+                    >
+                      0.08
+                    </th>
+                    <th
+                      class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700"
+                    >
+                      0.09
+                    </th>
                   </tr>
                 </thead>
-                <tbody id="z-table-body" class="bg-white divide-y divide-slate-100 dark:bg-slate-900 dark:divide-slate-800"></tbody>
+                <tbody
+                  id="z-table-body"
+                  class="bg-white divide-y divide-slate-100 dark:bg-slate-900 dark:divide-slate-800"
+                ></tbody>
               </table>
             </div>
           </div>
           <div id="z-critical-content" class="p-6 hidden">
-            <h3 class="text-sm font-bold text-slate-700 mb-3 dark:text-slate-100">
+            <h3
+              class="text-sm font-bold text-slate-700 mb-3 dark:text-slate-100"
+            >
               Critical Z-Values for Common Confidence Levels
             </h3>
             <div class="overflow-x-auto">
-              <table class="w-full border-collapse text-xs font-mono border border-slate-300 dark:border-slate-700">
-                <thead class="bg-slate-200 dark:bg-slate-800 dark:text-slate-100">
+              <table
+                class="w-full border-collapse text-xs font-mono border border-slate-300 dark:border-slate-700"
+              >
+                <thead
+                  class="bg-slate-200 dark:bg-slate-800 dark:text-slate-100"
+                >
                   <tr>
-                    <th class="border border-slate-300 p-2 text-left font-bold">Confidence Level</th>
-                    <th class="border border-slate-300 p-2 text-center font-bold">Alpha (α)</th>
-                    <th class="border border-slate-300 p-2 text-center font-bold">Z-Critical (Two-Tailed)</th>
-                    <th class="border border-slate-300 p-2 text-center font-bold">Z-Critical (One-Tailed)</th>
+                    <th class="border border-slate-300 p-2 text-left font-bold">
+                      Confidence Level
+                    </th>
+                    <th
+                      class="border border-slate-300 p-2 text-center font-bold"
+                    >
+                      Alpha (α)
+                    </th>
+                    <th
+                      class="border border-slate-300 p-2 text-center font-bold"
+                    >
+                      Z-Critical (Two-Tailed)
+                    </th>
+                    <th
+                      class="border border-slate-300 p-2 text-center font-bold"
+                    >
+                      Z-Critical (One-Tailed)
+                    </th>
                   </tr>
                 </thead>
-                <tbody id="z-critical-body" class="bg-white dark:bg-slate-900"></tbody>
+                <tbody
+                  id="z-critical-body"
+                  class="bg-white dark:bg-slate-900"
+                ></tbody>
               </table>
             </div>
           </div>
           <div id="t-table-content" class="p-6 hidden">
-            <h3 class="text-sm font-bold text-slate-700 mb-3 dark:text-slate-100">
+            <h3
+              class="text-sm font-bold text-slate-700 mb-3 dark:text-slate-100"
+            >
               Student's T-Distribution Critical Values
             </h3>
             <p class="text-xs text-slate-600 mb-4 dark:text-slate-400">
               Two-tailed test values for common degrees of freedom
             </p>
             <div class="overflow-x-auto">
-              <table class="w-full border-collapse text-xs font-mono border border-slate-300 dark:border-slate-700">
-                <thead class="bg-slate-200 dark:bg-slate-800 dark:text-slate-100">
+              <table
+                class="w-full border-collapse text-xs font-mono border border-slate-300 dark:border-slate-700"
+              >
+                <thead
+                  class="bg-slate-200 dark:bg-slate-800 dark:text-slate-100"
+                >
                   <tr>
                     <th
                       rowspan="2"
@@ -543,46 +533,118 @@
                     </th>
                   </tr>
                   <tr>
-                    <th class="border border-slate-300 p-2 text-center font-bold">0.25</th>
-                    <th class="border border-slate-300 p-2 text-center font-bold">0.20</th>
-                    <th class="border border-slate-300 p-2 text-center font-bold">0.15</th>
-                    <th class="border border-slate-300 p-2 text-center font-bold">0.10</th>
-                    <th class="border border-slate-300 p-2 text-center font-bold">0.05</th>
-                    <th class="border border-slate-300 p-2 text-center font-bold">0.025</th>
-                    <th class="border border-slate-300 p-2 text-center font-bold">0.01</th>
-                    <th class="border border-slate-300 p-2 text-center font-bold">0.005</th>
-                    <th class="border border-slate-300 p-2 text-center font-bold">0.001</th>
-                    <th class="border border-slate-300 p-2 text-center font-bold">0.0005</th>
+                    <th
+                      class="border border-slate-300 p-2 text-center font-bold"
+                    >
+                      0.25
+                    </th>
+                    <th
+                      class="border border-slate-300 p-2 text-center font-bold"
+                    >
+                      0.20
+                    </th>
+                    <th
+                      class="border border-slate-300 p-2 text-center font-bold"
+                    >
+                      0.15
+                    </th>
+                    <th
+                      class="border border-slate-300 p-2 text-center font-bold"
+                    >
+                      0.10
+                    </th>
+                    <th
+                      class="border border-slate-300 p-2 text-center font-bold"
+                    >
+                      0.05
+                    </th>
+                    <th
+                      class="border border-slate-300 p-2 text-center font-bold"
+                    >
+                      0.025
+                    </th>
+                    <th
+                      class="border border-slate-300 p-2 text-center font-bold"
+                    >
+                      0.01
+                    </th>
+                    <th
+                      class="border border-slate-300 p-2 text-center font-bold"
+                    >
+                      0.005
+                    </th>
+                    <th
+                      class="border border-slate-300 p-2 text-center font-bold"
+                    >
+                      0.001
+                    </th>
+                    <th
+                      class="border border-slate-300 p-2 text-center font-bold"
+                    >
+                      0.0005
+                    </th>
                   </tr>
                 </thead>
-                <tbody id="t-table-body" class="bg-white dark:bg-slate-900"></tbody>
+                <tbody
+                  id="t-table-body"
+                  class="bg-white dark:bg-slate-900"
+                ></tbody>
               </table>
             </div>
           </div>
           <div id="chi-square-content" class="p-6 hidden">
-            <h3 class="text-sm font-bold text-slate-700 mb-3 dark:text-slate-100">
+            <h3
+              class="text-sm font-bold text-slate-700 mb-3 dark:text-slate-100"
+            >
               Chi-Square Distribution Critical Values
             </h3>
             <p class="text-xs text-slate-600 mb-4 dark:text-slate-400">
               Right-tail critical values for common degrees of freedom
             </p>
             <div class="overflow-x-auto">
-              <table class="w-full border-collapse text-xs font-mono border border-slate-300 dark:border-slate-700">
-                <thead class="bg-slate-200 dark:bg-slate-800 dark:text-slate-100">
+              <table
+                class="w-full border-collapse text-xs font-mono border border-slate-300 dark:border-slate-700"
+              >
+                <thead
+                  class="bg-slate-200 dark:bg-slate-800 dark:text-slate-100"
+                >
                   <tr>
-                    <th class="border border-slate-300 p-2 text-left font-bold">df</th>
-                    <th class="border border-slate-300 p-2 text-center font-bold">90%</th>
-                    <th class="border border-slate-300 p-2 text-center font-bold">95%</th>
-                    <th class="border border-slate-300 p-2 text-center font-bold">98%</th>
-                    <th class="border border-slate-300 p-2 text-center font-bold">99%</th>
+                    <th class="border border-slate-300 p-2 text-left font-bold">
+                      df
+                    </th>
+                    <th
+                      class="border border-slate-300 p-2 text-center font-bold"
+                    >
+                      90%
+                    </th>
+                    <th
+                      class="border border-slate-300 p-2 text-center font-bold"
+                    >
+                      95%
+                    </th>
+                    <th
+                      class="border border-slate-300 p-2 text-center font-bold"
+                    >
+                      98%
+                    </th>
+                    <th
+                      class="border border-slate-300 p-2 text-center font-bold"
+                    >
+                      99%
+                    </th>
                   </tr>
                 </thead>
-                <tbody id="chi-square-body" class="bg-white dark:bg-slate-900"></tbody>
+                <tbody
+                  id="chi-square-body"
+                  class="bg-white dark:bg-slate-900"
+                ></tbody>
               </table>
             </div>
           </div>
         </div>
-        <div class="bg-slate-50 border-t border-slate-200 px-6 py-3 flex justify-end dark:bg-slate-950 dark:border-slate-800">
+        <div
+          class="bg-slate-50 border-t border-slate-200 px-6 py-3 flex justify-end dark:bg-slate-950 dark:border-slate-800"
+        >
           <button
             onclick="closeReferenceTables()"
             class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded text-sm font-bold transition-colors dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200"
@@ -592,9 +654,210 @@
         </div>
       </div>
     </div>
+
+    <!-- CALCULATOR WINDOW -->
+    <div id="calculator-window" style="display: none">
+      <div id="calculator-titlebar">
+        <span>Calculator</span>
+        <div id="calculator-controls">
+          <button
+            class="calc-btn"
+            onclick="minimizeCalculator()"
+            title="Minimize"
+          >
+            &#8212;
+          </button>
+          <button
+            class="calc-btn calc-max"
+            onclick="maximizeCalculator()"
+            title="Maximize"
+          >
+            &#9633;
+          </button>
+          <button
+            class="calc-btn calc-close"
+            onclick="closeCalculator()"
+            title="Close"
+          >
+            &#10005;
+          </button>
+        </div>
+      </div>
+
+      <div id="calculator-body">
+        <div style="flex: 1; display: flex; flex-direction: column">
+          <input id="calculator-display" placeholder="0" readonly />
+
+          <div class="calc-keys">
+            <button onclick="calcMemoryClear()">MC</button>
+            <button onclick="calcMemoryRecall()">MR</button>
+            <button onclick="calcMemoryAdd()">M+</button>
+            <button onclick="calcMemorySub()">M-</button>
+            <button class="calc-op" onclick="calcClearDisplay()">C</button>
+
+            <button class="calc-op" onclick="calcPress('sin(')">sin</button>
+            <button class="calc-op" onclick="calcPress('cos(')">cos</button>
+            <button class="calc-op" onclick="calcPress('tan(')">tan</button>
+            <button class="calc-op" onclick="calcPress('log(')">log</button>
+            <button class="calc-op" onclick="calcPress('ln(')">ln</button>
+
+            <button onclick="calcPress('sqrt(')">√</button>
+            <button onclick="calcPress('^2')">x²</button>
+            <button onclick="calcPress('^')">xʸ</button>
+            <button onclick="calcPress('pi')">π</button>
+            <button onclick="calcPress('e')">e</button>
+
+            <button onclick="calcPress('7')">7</button>
+            <button onclick="calcPress('8')">8</button>
+            <button onclick="calcPress('9')">9</button>
+            <button class="calc-op" onclick="calcPress('/')">÷</button>
+            <button class="calc-op" onclick="calcBackspace()">⌫</button>
+
+            <button onclick="calcPress('4')">4</button>
+            <button onclick="calcPress('5')">5</button>
+            <button onclick="calcPress('6')">6</button>
+            <button class="calc-op" onclick="calcPress('*')">×</button>
+            <button class="calc-op" onclick="calcPress('(')">(</button>
+
+            <button onclick="calcPress('1')">1</button>
+            <button onclick="calcPress('2')">2</button>
+            <button onclick="calcPress('3')">3</button>
+            <button class="calc-op" onclick="calcPress('-')">-</button>
+            <button class="calc-op" onclick="calcPress(')')">)</button>
+
+            <button onclick="calcPress('0')">0</button>
+            <button onclick="calcPress('.')">.</button>
+            <button class="calc-eq" onclick="calcCalculate()">=</button>
+            <button class="calc-op" onclick="calcPress('+')">+</button>
+            <button
+              class="calc-op"
+              style="font-size: 10px"
+              onclick="calcClearHistory()"
+            >
+              CLR H
+            </button>
+          </div>
+        </div>
+
+        <div id="calculator-history"></div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.0/math.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mathjs@12/lib/browser/math.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="app.js"></script>
     <script src="reference-tables.js"></script>
+
+    <script>
+      // Calculator functionality
+      let calcDisplay = document.getElementById("calculator-display");
+      let calcHistoryBox = document.getElementById("calculator-history");
+      let calcMemory = 0;
+      let calcDragging = false;
+      let calcOffsetX = 0;
+      let calcOffsetY = 0;
+
+      function calcPress(v) {
+        calcDisplay.value += v;
+      }
+
+      function calcClearDisplay() {
+        calcDisplay.value = "";
+      }
+
+      function calcBackspace() {
+        calcDisplay.value = calcDisplay.value.slice(0, -1);
+      }
+
+      function calcCalculate() {
+        if (!calcDisplay.value) return;
+        try {
+          let result = math.evaluate(calcDisplay.value);
+          if (typeof result === "number" && !Number.isInteger(result)) {
+            result = Math.round(result * 100000000) / 100000000;
+          }
+          calcAddHistory(calcDisplay.value + " = " + result);
+          calcDisplay.value = result;
+        } catch {
+          calcDisplay.value = "Error";
+        }
+      }
+
+      function calcAddHistory(item) {
+        let div = document.createElement("div");
+        div.className = "calc-hist-item";
+        div.innerText = item;
+        calcHistoryBox.prepend(div);
+      }
+
+      function calcClearHistory() {
+        calcHistoryBox.innerHTML = "";
+      }
+
+      function calcMemoryClear() {
+        calcMemory = 0;
+      }
+      function calcMemoryRecall() {
+        calcDisplay.value += calcMemory;
+      }
+      function calcMemoryAdd() {
+        calcMemory += Number(calcDisplay.value) || 0;
+      }
+      function calcMemorySub() {
+        calcMemory -= Number(calcDisplay.value) || 0;
+      }
+
+      function openCalculator() {
+        document.getElementById("calculator-window").style.display = "flex";
+      }
+
+      function closeCalculator() {
+        document.getElementById("calculator-window").style.display = "none";
+      }
+
+      function minimizeCalculator() {
+        const body = document.getElementById("calculator-body");
+        body.style.display = body.style.display === "none" ? "flex" : "none";
+      }
+
+      function maximizeCalculator() {
+        const calcWindow = document.getElementById("calculator-window");
+        if (calcWindow.style.width === "100vw") {
+          calcWindow.style.position = "fixed";
+          calcWindow.style.width = "380px";
+          calcWindow.style.height = "auto";
+          calcWindow.style.top = "80px";
+          calcWindow.style.left = "80px";
+          calcWindow.style.borderRadius = "14px";
+        } else {
+          calcWindow.style.position = "fixed";
+          calcWindow.style.width = "100vw";
+          calcWindow.style.height = "100vh";
+          calcWindow.style.top = "0";
+          calcWindow.style.left = "0";
+          calcWindow.style.borderRadius = "0";
+        }
+      }
+
+      const calcTitlebar = document.getElementById("calculator-titlebar");
+      const calcWindow = document.getElementById("calculator-window");
+
+      calcTitlebar.addEventListener("mousedown", (e) => {
+        calcDragging = true;
+        calcOffsetX = e.clientX - calcWindow.offsetLeft;
+        calcOffsetY = e.clientY - calcWindow.offsetTop;
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (!calcDragging) return;
+        calcWindow.style.left = e.clientX - calcOffsetX + "px";
+        calcWindow.style.top = e.clientY - calcOffsetY + "px";
+      });
+
+      document.addEventListener("mouseup", () => {
+        calcDragging = false;
+      });
+    </script>
   </body>
 </html>
