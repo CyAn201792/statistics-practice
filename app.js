@@ -342,7 +342,7 @@ function renderQuestionCard() {
                 }">
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                         <div class="flex items-center gap-2">
-                            <span class="text-xs font-bold uppercase tracking-wide text-slate-900 font-mono dark:text-slate-300">${step.label}</span>
+                            <span class="text-xs font-bold tracking-wide text-slate-900 font-mono dark:text-slate-300">${step.label}</span>
                             ${
                               isCurrent
                                 ? `
