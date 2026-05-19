@@ -23,6 +23,7 @@ After taking a qualification exam for my Quantitative Business Analysis course, 
 
 - **Built-in Tables:** Quick access to essential statistical reference tables: **Cumulative Z**, **Mean-to-Z**, **Student's T**, and **Chi-Square**.
 - **Insert Symbols Palette:** Easily insert standard symbols like mu (mean) and sigma (standard deviation) directly into your workspace using the built-in palette above the question.
+- **Calculator:** A floating scientific calculator is included to aid computations.
 
 ### 📈 Interactive Data Visualizations
 
