@@ -629,7 +629,7 @@
       },
       {
         "label": "Step 2: State the alternative hypothesis (Hₐ) that matches the manager's claim.",
-        "expected": "mu > 11.2"
+        "expected": "H_a: mu > 11.2"
       },
       {
         "label": "Step 3: Calculate the Z test statistic. Use the formula Z = (x̄ - μ) / (σ / √n). express your answer using 2 decimal places.",
@@ -695,11 +695,11 @@
     "steps": [
       {
         "label": "Step 1: State the null hypothesis (H₀) regarding the population proportion (p). Please type p, the sign, and the value.",
-        "expected": "p = 0.50"
+        "expected": "H_0: p = 0.50"
       },
       {
         "label": "Step 2: State the alternative hypothesis (Hₐ) that matches the firm's claim.",
-        "expected": "p > 0.50"
+        "expected": "H_a: p > 0.50"
       },
       {
         "label": "Step 3: Determine the sample proportion (p̂). express your answer using 2 decimal places.",
@@ -783,11 +783,11 @@
     "steps": [
       {
         "label": "Step 1: State the null hypothesis (H₀) regarding the regional population proportion (p). Please type H₀ for the null hypothesis and use the standard equality sign.",
-        "expected": "p = 0.05"
+        "expected": "H_0: p = 0.05"
       },
       {
         "label": "Step 2: State the alternative hypothesis (Hₐ) that matches the economist's claim. Use the less than sign.",
-        "expected": "p < 0.05"
+        "expected": "H_a: p < 0.05"
       },
       {
         "label": "Step 3: Determine the sample proportion (p̂). express your answer using 2 decimal places.",
@@ -849,11 +849,11 @@
     "steps": [
       {
         "label": "Step 1: State the null hypothesis (H₀) regarding the population mean sales (μ). Please type H₀ for the null hypothesis and use the standard equality sign. Use mu to represent the mean symbol.",
-        "expected": "mu = 1800"
+        "expected": "H_0: mu = 1800"
       },
       {
         "label": "Step 2: State the alternative hypothesis (Hₐ) that matches the manager's claim. Use the greater than sign.",
-        "expected": "mu > 1800"
+        "expected": "H_a: mu > 1800"
       },
       {
         "label": "Step 3: Determine the sample mean value (x̄) from the given data. express your answer as a whole number.",
@@ -953,11 +953,11 @@
     "steps": [
       {
         "label": "Step 1: State the null hypothesis (H₀) regarding the team's true population mean output (μ). Type H₀ for the null hypothesis, use a standard equality sign, and use the mean symbol (μ) in the insert symbols palette to represent the mean.",
-        "expected": " mu = 25"
+        "expected": "H_0: mu = 25"
       },
       {
         "label": "Step 2: State the alternative hypothesis (Hₐ) that matches the manager's directional claim. Use the greater than sign.",
-        "expected": "mu > 25"
+        "expected": "H_a: mu > 25"
       },
       {
         "label": "Step 3: Calculate the standard error of the mean using the formula σ / √n. express your answer as a whole number.",
