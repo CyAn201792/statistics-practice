@@ -164,73 +164,6 @@ function formatHypothesisPrefix(prefix) {
   return prefix;
 }
 
-function renderStepPrefix(prefix) {
-  if (!prefix) return "";
-
-  return `<span class="px-2 py-1.5 rounded border border-slate-300 bg-white text-slate-700 text-sm font-bold font-mono dark:bg-slate-900 dark:border-slate-700 dark:text-slate-100">${formatHypothesisPrefix(prefix)}</span>`;
-}
-
-function applyFilters() {
-  const selectedTopic = document.getElementById("category-select").value;
-  const selectedDiff = normalizeDifficulty(
-    document.getElementById("difficulty-select").value,
-  );
-  const questionBank = getCurrentQuestionBank();
-
-  activeQuestions = questionBank.filter((q) => {
-    const matchesTopic =
-      selectedTopic === "all" || q.type.includes(selectedTopic);
-    const matchesDiff =
-      selectedDiff === "all" ||
-      normalizeDifficulty(q.difficulty) === selectedDiff;
-    return matchesTopic && matchesDiff;
-  });
-
-  currentQuestionIndex = 0;
-  currentStepIndex = 0;
-  renderNavigatorGrid();
-  renderQuestionCard();
-}
-
-function switchGameMode(mode) {
-  currentGameMode = mode;
-
-  const btnGuided = document.getElementById("btn-mode-guided");
-  const btnExam = document.getElementById("btn-mode-exam");
-
-  if (mode === "guided") {
-    btnGuided.className =
-      "w-1/2 text-center py-1 rounded text-xs font-bold transition-all bg-white text-slate-900 shadow-sm cursor-pointer dark:bg-slate-700 dark:text-white";
-    btnExam.className =
-      "w-1/2 text-center py-1 rounded text-xs font-bold transition-all text-slate-500 hover:text-slate-800 cursor-pointer dark:text-slate-400 dark:hover:text-slate-100";
-  } else {
-    btnExam.className =
-      "w-1/2 text-center py-1 rounded text-xs font-bold transition-all bg-white text-slate-900 shadow-sm cursor-pointer dark:bg-slate-700 dark:text-white";
-    btnGuided.className =
-      "w-1/2 text-center py-1 rounded text-xs font-bold transition-all text-slate-500 hover:text-slate-800 cursor-pointer dark:text-slate-400 dark:hover:text-slate-100";
-  }
-
-  currentStepIndex = 0;
-  applyFilters();
-}
-
-function resetPerformanceCounters() {
-  totalQuestionsCompleted = 0;
-  totalCorrectSteps = 0;
-  totalWrongAttempts = 0;
-  answeredQuestionsMap = {};
-
-  // 🔥 clear storage too
-  localStorage.removeItem(LS_KEYS.ANSWERS);
-  localStorage.removeItem(LS_KEYS.METRICS);
-
-  document.getElementById("metric-completed").textContent = "0";
-  document.getElementById("metric-correct").textContent = "0";
-  document.getElementById("metric-wrong").textContent = "0";
-
-  applyFilters();
-}
-
 // ==========================================
 // 🧮 2. VISUAL FORMULA INPUT PALETTE UTILITY
 // ==========================================
@@ -283,12 +216,12 @@ function generateFormulaPaletteHTML() {
     `;
 }
 
-
 // ==========================================
 // 🎨 3. NAVIGATION & CANVAS DRAWERS
 // ==========================================
 function renderNavigatorGrid() {
   const navGrid = document.getElementById("question-navigator-grid");
+  if (!navGrid) return;
   navGrid.innerHTML = "";
 
   if (activeQuestions.length === 0) return;
@@ -328,13 +261,15 @@ function jumpToQuestion(idx) {
 
 function renderQuestionCard() {
   const container = document.getElementById("game-container");
+  if (!container) return;
 
   if (activeQuestions.length === 0) {
     container.innerHTML = `
             <div class="text-center py-16 text-slate-400 font-medium text-sm dark:text-slate-500">
                 No exam sections found matching the selected Topic & Difficulty criteria matrix.
             </div>`;
-    document.getElementById("chart-context-label").textContent = "N/A";
+    const contextLabel = document.getElementById("chart-context-label");
+    if (contextLabel) contextLabel.textContent = "N/A";
     if (statsChartInstance) statsChartInstance.destroy();
     setChartPanelVisible(false);
     return;
@@ -350,8 +285,11 @@ function renderQuestionCard() {
       : currentQuestion.prompt;
   const difficultyLevel = normalizeDifficulty(currentQuestion.difficulty);
   const difficultyLabel = formatDifficultyLabel(currentQuestion.difficulty);
-  document.getElementById("chart-context-label").textContent =
-    `Question ${currentQuestion.id} [${difficultyLabel}]`;
+  
+  const contextLabel = document.getElementById("chart-context-label");
+  if (contextLabel) {
+    contextLabel.textContent = `Question ${currentQuestion.id} [${difficultyLabel}]`;
+  }
 
   let html = `
         <div class="mb-5 flex flex-wrap justify-between items-center border-b border-slate-100 pb-3 gap-2 dark:border-slate-800">
@@ -414,13 +352,13 @@ function renderQuestionCard() {
                             }
                         </div>
                         <div class="flex items-center gap-2">
-                            ${renderStepPrefix(step.prefix)}
                             <input
                               id="step-input-${index}"
                               type="text"
                               class="math-input w-60 font-mono px-3 py-2 rounded-md border border-slate-300 bg-white text-slate-900 shadow-sm
                                     focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
                                     dark:bg-slate-900 dark:text-slate-100 dark:border-slate-700"
+                              ${!isCurrent ? "disabled" : ""}
                             />
                             
                             ${
@@ -492,10 +430,9 @@ function renderQuestionCard() {
 
   setTimeout(() => {
     if (currentGameMode === "guided") {
-      const activeInput = document.getElementById(
-        `step-input-${currentStepIndex}`,
-      );
+      const activeInput = document.getElementById(`step-input-${currentStepIndex}`);
       if (activeInput) {
+        activeInput.focus();
         activeInput.addEventListener("keydown", (e) => {
           if (e.key === "Enter") submitStep(currentStepIndex);
         });
@@ -503,6 +440,7 @@ function renderQuestionCard() {
     } else {
       const examInput = document.getElementById("exam-final-input");
       if (examInput) {
+        examInput.focus();
         examInput.addEventListener("keydown", (e) => {
           if (e.key === "Enter") submitExamAnswer();
         });
@@ -512,10 +450,9 @@ function renderQuestionCard() {
 
   if (isQuestionComplete) {
     setChartPanelVisible(true);
-    drawQuestionChart(
-      currentQuestion.chartData,
-      currentQuestion.chartData.targetX,
-    );
+    if (currentQuestion.chartData) {
+      drawQuestionChart(currentQuestion.chartData, currentQuestion.chartData.targetX);
+    }
   } else {
     setChartPanelVisible(false);
   }
@@ -532,165 +469,94 @@ function submitStep(stepIdx) {
   const feedbackEl = document.getElementById(`step-feedback-${stepIdx}`);
 
   const userInput = inputEl ? inputEl.value.trim() : "";
-
   if (!userInput) return;
 
-  // Reset card error animations/color shifts before evaluating
-  cardEl.classList.remove(
-    "animate-shake",
-    "border-rose-300",
-    "bg-rose-50/30",
-    "dark:border-rose-800",
-    "dark:bg-rose-950/30",
-  );
-  if (inputEl)
-    inputEl.classList.remove(
-      "border-rose-400",
-      "bg-rose-50/50",
-      "dark:border-rose-700",
-      "dark:bg-rose-950/40",
-    );
+  cardEl.classList.remove("animate-shake", "border-rose-300", "bg-rose-50/30", "dark:border-rose-800", "dark:bg-rose-950/30");
+  if (inputEl) inputEl.classList.remove("border-rose-400", "bg-rose-50/50", "dark:border-rose-700", "dark:bg-rose-950/40");
 
   if (approxEqual(userInput, stepData.expected)) {
-    showFeedback(feedbackEl, "✓ Perfect!", "text-emerald-600");
+    showFeedback(feedbackEl, "✓ Perfect!", "success");
     totalCorrectSteps++;
     currentStepIndex++;
     updateMetricsDisplay();
     saveMetrics();
 
     if (currentStepIndex < currentQuestion.steps.length) {
-      setTimeout(() => {
-        renderQuestionCard();
-      }, 600);
+      setTimeout(() => { renderQuestionCard(); }, 600);
     } else {
       setTimeout(() => {
         totalQuestionsCompleted++;
         answeredQuestionsMap[getQuestionProgressKey(currentQuestion)] = true;
         updateMetricsDisplay();
-
         saveAnsweredMap();
         saveMetrics();
-
         renderNavigatorGrid();
-        document.getElementById("explanation-box").classList.remove("hidden");
+        
+        const expBox = document.getElementById("explanation-box");
+        if (expBox) expBox.classList.remove("hidden");
+        
         setChartPanelVisible(true);
-        drawQuestionChart(
-          currentQuestion.chartData,
-          currentQuestion.chartData.targetX,
-        );
+        if (currentQuestion.chartData) {
+          drawQuestionChart(currentQuestion.chartData, currentQuestion.chartData.targetX);
+        }
       }, 550);
     }
   } else {
     totalWrongAttempts++;
     updateMetricsDisplay();
     saveMetrics();
-    showFeedback(feedbackEl, "✕ Incorrect. Please try again.", "text-rose-600");
-    cardEl.classList.add(
-      "animate-shake",
-      "border-rose-300",
-      "bg-rose-50/30",
-      "dark:border-rose-800",
-      "dark:bg-rose-950/30",
-    );
-    if (inputEl)
-      inputEl.classList.add(
-        "border-rose-400",
-        "bg-rose-50/50",
-        "dark:border-rose-700",
-        "dark:bg-rose-950/40",
-      );
+    showFeedback(feedbackEl, "✕ Incorrect. Please try again.", "error");
+    cardEl.classList.add("animate-shake", "border-rose-300", "bg-rose-50/30", "dark:border-rose-800", "dark:bg-rose-950/30");
+    if (inputEl) inputEl.classList.add("border-rose-400", "bg-rose-50/50", "dark:border-rose-700", "dark:bg-rose-950/40");
   }
 }
 
 function submitExamAnswer() {
   const currentQuestion = activeQuestions[currentQuestionIndex];
-
-  const finalAnswer =
-    currentQuestion.answer || currentQuestion.steps?.at(-1)?.expected;
+  const finalAnswer = currentQuestion.answer || currentQuestion.steps?.at(-1)?.expected;
 
   const inputEl = document.getElementById("exam-final-input");
   const cardEl = document.getElementById("step-card-exam");
   const feedbackEl = document.getElementById("exam-feedback");
 
-  const userInput = inputEl?.value.trim();
-
+  const userInput = inputEl ? inputEl.value.trim() : "";
   if (!userInput) return;
 
-  // Reset previous error styling
-  cardEl.classList.remove(
-    "animate-shake",
-    "border-rose-300",
-    "bg-rose-50/30",
-    "dark:border-rose-800",
-    "dark:bg-rose-950/30",
-  );
-
-  inputEl?.classList.remove(
-    "border-rose-400",
-    "bg-rose-50/50",
-    "dark:border-rose-700",
-    "dark:bg-rose-950/40",
-  );
+  if (cardEl) cardEl.classList.remove("animate-shake", "border-rose-300", "bg-rose-50/30", "dark:border-rose-800", "dark:bg-rose-950/30");
+  if (inputEl) inputEl.classList.remove("border-rose-400", "bg-rose-50/50", "dark:border-rose-700", "dark:bg-rose-950/40");
 
   const isCorrect = approxEqual(userInput, finalAnswer);
 
-  // ------------------------------------------------------------------
-  // Correct Answer
-  // ------------------------------------------------------------------
-
   if (isCorrect) {
     showFeedback(feedbackEl, "✅ Correct!", "success");
-
     totalCorrectSteps++;
     totalQuestionsCompleted++;
-
     answeredQuestionsMap[getQuestionProgressKey(currentQuestion)] = true;
 
     updateMetricsDisplay();
-
     saveAnsweredMap();
     saveMetrics();
-
     renderNavigatorGrid();
 
-    document.getElementById("explanation-box")?.classList.remove("hidden");
+    const expBox = document.getElementById("explanation-box");
+    if (expBox) expBox.classList.remove("hidden");
 
     setChartPanelVisible(true);
-
-    drawQuestionChart(
-      currentQuestion.chartData,
-      currentQuestion.chartData.targetX,
-    );
-
+    if (currentQuestion.chartData) {
+      drawQuestionChart(currentQuestion.chartData, currentQuestion.chartData.targetX);
+    }
     return;
   }
 
-  // ------------------------------------------------------------------
-  // Incorrect Answer
-  // ------------------------------------------------------------------
-
   totalWrongAttempts++;
-
   updateMetricsDisplay();
   saveMetrics();
-
   showFeedback(feedbackEl, "❌ Not quite! Try again.", "error");
 
-  cardEl.classList.add(
-    "animate-shake",
-    "border-rose-300",
-    "bg-rose-50/30",
-    "dark:border-rose-800",
-    "dark:bg-rose-950/30",
-  );
-
-  inputEl?.classList.add(
-    "border-rose-400",
-    "bg-rose-50/50",
-    "dark:border-rose-700",
-    "dark:bg-rose-950/40",
-  );
+  if (cardEl) cardEl.classList.add("animate-shake", "border-rose-300", "bg-rose-50/30", "dark:border-rose-800", "dark:bg-rose-950/30");
+  if (inputEl) inputEl.classList.add("border-rose-400", "bg-rose-50/50", "dark:border-rose-700", "dark:bg-rose-950/40");
 }
+
 function nextQuestion() {
   if (currentQuestionIndex === activeQuestions.length - 1) {
     applyFilters();
@@ -703,21 +569,22 @@ function nextQuestion() {
 }
 
 function updateMetricsDisplay() {
-  document.getElementById("metric-completed").textContent =
-    totalQuestionsCompleted;
-  document.getElementById("metric-correct").textContent = totalCorrectSteps;
-  document.getElementById("metric-wrong").textContent = totalWrongAttempts;
+  const mComp = document.getElementById("metric-completed");
+  const mCorr = document.getElementById("metric-correct");
+  const mWrong = document.getElementById("metric-wrong");
+  
+  if (mComp) mComp.textContent = totalQuestionsCompleted;
+  if (mCorr) mCorr.textContent = totalCorrectSteps;
+  if (mWrong) mWrong.textContent = totalWrongAttempts;
 }
 
 function showFeedback(element, message, type = "success") {
   if (!element) return;
-
   const styles = {
-    success: "text-emerald-600",
-    error: "text-rose-600",
-    info: "text-blue-600",
+    success: "text-emerald-600 dark:text-emerald-400",
+    error: "text-rose-600 dark:text-rose-400",
+    info: "text-blue-600 dark:text-blue-400",
   };
-
   element.className = `mt-3 font-semibold ${styles[type]}`;
   element.textContent = message;
 }
@@ -739,10 +606,60 @@ function setChartPanelVisible(isVisible) {
   }
 }
 
+function applyFilters() {
+  const catSelect = document.getElementById("category-select");
+  const diffSelect = document.getElementById("difficulty-select");
+  if (!catSelect || !diffSelect) return;
+
+  const selectedTopic = catSelect.value;
+  const selectedDiff = normalizeDifficulty(diffSelect.value);
+  const questionBank = getCurrentQuestionBank();
+
+  activeQuestions = questionBank.filter((q) => {
+    const matchesTopic = selectedTopic === "all" || q.type.includes(selectedTopic);
+    const matchesDiff = selectedDiff === "all" || normalizeDifficulty(q.difficulty) === selectedDiff;
+    return matchesTopic && matchesDiff;
+  });
+
+  currentQuestionIndex = 0;
+  currentStepIndex = 0;
+  renderNavigatorGrid();
+  renderQuestionCard();
+}
+
+function switchGameMode(mode) {
+  currentGameMode = mode;
+  const btnGuided = document.getElementById("btn-mode-guided");
+  const btnExam = document.getElementById("btn-mode-exam");
+
+  if (mode === "guided") {
+    if (btnGuided) btnGuided.className = "w-1/2 text-center py-1 rounded text-xs font-bold transition-all bg-white text-slate-900 shadow-sm cursor-pointer dark:bg-slate-700 dark:text-white";
+    if (btnExam) btnExam.className = "w-1/2 text-center py-1 rounded text-xs font-bold transition-all text-slate-500 hover:text-slate-800 cursor-pointer dark:text-slate-400 dark:hover:text-slate-100";
+  } else {
+    if (btnExam) btnExam.className = "w-1/2 text-center py-1 rounded text-xs font-bold transition-all bg-white text-slate-900 shadow-sm cursor-pointer dark:bg-slate-700 dark:text-white";
+    if (btnGuided) btnGuided.className = "w-1/2 text-center py-1 rounded text-xs font-bold transition-all text-slate-500 hover:text-slate-800 cursor-pointer dark:text-slate-400 dark:hover:text-slate-100";
+  }
+
+  currentStepIndex = 0;
+  applyFilters();
+}
+
+function resetPerformanceCounters() {
+  totalQuestionsCompleted = 0;
+  totalCorrectSteps = 0;
+  totalWrongAttempts = 0;
+  answeredQuestionsMap = {};
+
+  localStorage.removeItem(LS_KEYS.ANSWERS);
+  localStorage.removeItem(LS_KEYS.METRICS);
+
+  updateMetricsDisplay();
+  applyFilters();
+}
+
 // ==========================================
 // ⚙️ 5. LATEX-AWARE COMPUTATIONAL ALGEBRA ENGINE
 // ==========================================
-
 function normalizeRawAnswer(value) {
   return String(value)
     .replace(/\$/g, "")
@@ -751,9 +668,27 @@ function normalizeRawAnswer(value) {
     .trim();
 }
 
+function normalizeHypothesisExpression(value) {
+  return String(value)
+    .toLowerCase()
+    .replace(/\\mu/g, "mu")
+    .replace(/\\alpha/g, "alpha")
+    .replace(/\\sigma/g, "sigma")
+    .replace(/h_0:/g, "")
+    .replace(/h_a:/g, "")
+    .replace(/h0:/g, "")
+    .replace(/ha:/g, "")
+    .replace(/h₀:/g, "")
+    .replace(/hₐ:/g, "")
+    .replace(/\\le/g, "<=")
+    .replace(/\\ge/g, ">=")
+    .replace(/\s+/g, "")
+    .trim();
+}
+
 function isHypothesisExpression(value) {
   return /^[a-z]+(?:=|<|>|<=|>=)-?\d+(\.\d+)?%?$/.test(
-    normalizeHypothesisExpression(value),
+    normalizeHypothesisExpression(value)
   );
 }
 
@@ -763,54 +698,39 @@ function approxEqual(userInput, expectedAnswer, tolerance = 0.05) {
 
     function extractNumber(s) {
       if (s === null || s === undefined) return NaN;
-
       return parseFloat(
         String(s)
-          .replace(/[\s\u200B-\u200D\uFEFF\u00A0]/g, "") // remove hidden spaces
+          .replace(/[\s\u200B-\u200D\uFEFF\u00A0]/g, "")
           .replace(/,/g, "")
           .replace("%", "")
-          .replace(/\\,/g, ""),
+          .replace(/\\,/g, "")
       );
     }
+    
     const numInput = extractNumber(userInput);
     const numExpected = extractNumber(expectedAnswer);
-
-    function normalizeText(s) {
-      return String(s)
-        .toLowerCase()
-        .replace(/h0/g, "h0")
-        .replace(/h₀/g, "h0")
-        .replace(/[^\p{L}\p{N}\s]/gu, "")
-        .replace(/\s+/g, " ")
-        .trim();
-    }
 
     if (!isNaN(numInput) && !isNaN(numExpected)) {
       return Math.abs(numInput - numExpected) <= tolerance;
     }
+
     // ==========================================
-    // 1. RAW INPUT CLEANUP (MathLive + LaTeX)
+    // 1. RAW INPUT CLEANUP
     // ==========================================
     let cleanInput = normalizeRawAnswer(userInput);
     let cleanExpected = normalizeRawAnswer(expectedAnswer);
 
-    // ... [Keep your exact Step 1 cleanup code here] ...
-
-    cleanInput = cleanInput.replace(/\s+/g, " ").trim();
-    cleanExpected = cleanExpected.replace(/\s+/g, " ").trim();
+    cleanInput = cleanInput.replace(/\\,/g, "").replace(/\s+/g, " ").trim();
+    cleanExpected = cleanExpected.replace(/\\,/g, "").replace(/\s+/g, " ").trim();
 
     // ==========================================
-    // 1.5. EARLY EXIT FOR DIRECT TEXT MATCH (Fixes "Reject" bug)
+    // 1.5. EARLY EXIT FOR DIRECT TEXT MATCH
     // ==========================================
     const normInput = cleanInput.toLowerCase().trim();
     const normExpected = cleanExpected.toLowerCase().trim();
     const decisionWords = ["reject", "fail to reject"];
 
-    // If it's a known text conclusion, handle it immediately and exit
-    if (
-      decisionWords.includes(normExpected) ||
-      decisionWords.includes(normInput)
-    ) {
+    if (decisionWords.includes(normExpected) || decisionWords.includes(normInput)) {
       return (
         normInput === normExpected ||
         normInput.includes(normExpected) ||
@@ -818,7 +738,6 @@ function approxEqual(userInput, expectedAnswer, tolerance = 0.05) {
       );
     }
 
-    // Generic text exact match fallback
     if (normInput === normExpected && normInput !== "") {
       return true;
     }
@@ -826,23 +745,18 @@ function approxEqual(userInput, expectedAnswer, tolerance = 0.05) {
     // ==========================================
     // 2. HYPOTHESIS / EQUATION MATCHING
     // ==========================================
-
-    // Removes hidden / MathLive / formatting artifacts
     function normalizeEquationString(s) {
       return String(s)
         .replace(/\$/g, "")
         .replace(/\s+/g, "")
-        .replace(/[\u200B-\u200D\uFEFF]/g, ""); // zero-width chars
+        .replace(/[\u200B-\u200D\uFEFF]/g, "");
     }
 
-    // Parses something like: p = 0.5, μ>=10, x<3.2
     function parseEquation(s) {
       const match = normalizeEquationString(s).match(
-        /^([a-zA-Zμσ])\s*(=|<=|>=|<|>)\s*(-?\d+(\.\d+)?)/,
+        /^([a-zA-Zμσ])\s*(=|<=|>=|<|>)\s*(-?\d+(\.\d+)?)/
       );
-
       if (!match) return null;
-
       return {
         variable: match[1],
         operator: match[2],
@@ -850,7 +764,6 @@ function approxEqual(userInput, expectedAnswer, tolerance = 0.05) {
       };
     }
 
-    // Handle equation-style answers FIRST (before fallback logic)
     const eqInput = parseEquation(cleanInput);
     const eqExpected = parseEquation(cleanExpected);
 
@@ -861,15 +774,13 @@ function approxEqual(userInput, expectedAnswer, tolerance = 0.05) {
         Math.abs(eqInput.value - eqExpected.value) <= tolerance
       );
     }
+
     // ==========================================
     // 3. INTERVAL / ORDERED PAIR HANDLING
     // ==========================================
     const intervalPattern = /^\(?\s*-?\d+(\.\d+)?\s*,\s*-?\d+(\.\d+)?\s*\)?$/;
 
-    if (
-      intervalPattern.test(cleanInput) &&
-      intervalPattern.test(cleanExpected)
-    ) {
+    if (intervalPattern.test(cleanInput) && intervalPattern.test(cleanExpected)) {
       const inputNums = cleanInput.match(/-?\d+(\.\d+)?/g).map(Number);
       const expectedNums = cleanExpected.match(/-?\d+(\.\d+)?/g).map(Number);
 
@@ -882,10 +793,7 @@ function approxEqual(userInput, expectedAnswer, tolerance = 0.05) {
     // ==========================================
     // 4. STRUCTURED HYPOTHESIS EXPRESSIONS
     // ==========================================
-    if (
-      isHypothesisExpression(cleanExpected) &&
-      isHypothesisExpression(cleanInput)
-    ) {
+    if (isHypothesisExpression(cleanExpected) && isHypothesisExpression(cleanInput)) {
       return (
         normalizeHypothesisExpression(cleanInput) ===
         normalizeHypothesisExpression(cleanExpected)
@@ -897,9 +805,7 @@ function approxEqual(userInput, expectedAnswer, tolerance = 0.05) {
     // ==========================================
     if (
       cleanExpected.includes("=") &&
-      (cleanExpected.includes("μ") ||
-        cleanExpected.includes("σ") ||
-        cleanExpected.includes("X"))
+      (cleanExpected.includes("μ") || cleanExpected.includes("σ") || cleanExpected.includes("X"))
     ) {
       const inputNumbers = cleanInput.match(/-?\d+(\.\d+)?/g) || [];
       const expectedNumbers = cleanExpected.match(/-?\d+(\.\d+)?/g) || [];
@@ -910,8 +816,7 @@ function approxEqual(userInput, expectedAnswer, tolerance = 0.05) {
       expectedNumbers.sort((a, b) => Number(a) - Number(b));
 
       return expectedNumbers.every(
-        (num, idx) =>
-          Math.abs(Number(num) - Number(inputNumbers[idx])) < tolerance,
+        (num, idx) => Math.abs(Number(num) - Number(inputNumbers[idx])) < tolerance
       );
     }
 
@@ -957,6 +862,7 @@ function approxEqual(userInput, expectedAnswer, tolerance = 0.05) {
 
   return false;
 }
+
 function normalPDF(x, mu, sigma) {
   return (
     (1 / (sigma * Math.sqrt(2 * Math.PI))) *
@@ -967,7 +873,6 @@ function normalPDF(x, mu, sigma) {
 // ==========================================
 // 📊 CHART RENDERING ENGINES
 // ==========================================
-
 function drawQuestionChart(chartData, shadeThreshold = null) {
   if (!chartData) return;
 
@@ -998,12 +903,13 @@ function resetChartCanvas() {
   const canvas = document.getElementById("statsChart");
   if (!canvas) return null;
 
-  if (typeof statsChartInstance !== "undefined" && statsChartInstance) {
+  if (statsChartInstance) {
     statsChartInstance.destroy();
   }
 
   return canvas.getContext("2d");
 }
+
 function drawConfidenceIntervalBounds(chartData) {
   const ctx = resetChartCanvas();
   if (!ctx) return;
@@ -1083,13 +989,7 @@ function formatDatasetLabel(key) {
 
 function getNumericChartKeys(chartData) {
   return Object.keys(chartData).filter((key) => {
-    if (
-      key === "type" ||
-      key === "categories" ||
-      key === "labels" ||
-      key === "id"
-    )
-      return false;
+    if (key === "type" || key === "categories" || key === "labels" || key === "id") return false;
     return (
       Array.isArray(chartData[key]) &&
       chartData[key].length > 0 &&
@@ -1311,12 +1211,8 @@ function drawNormalCurve(mu, sigma, shadeThreshold = null) {
 
   const curveColor = isDarkMode() ? "#93c5fd" : "#0A192F";
   const gridColor = isDarkMode() ? "#1e293b" : "#f1f5f9";
-  const fillColor = isDarkMode()
-    ? "rgba(147, 197, 253, 0.06)"
-    : "rgba(10, 25, 47, 0.02)";
-  const shadedColor = isDarkMode()
-    ? "rgba(251, 113, 133, 0.25)"
-    : "rgba(225, 29, 72, 0.2)";
+  const fillColor = isDarkMode() ? "rgba(147, 197, 253, 0.06)" : "rgba(10, 25, 47, 0.02)";
+  const shadedColor = isDarkMode() ? "rgba(251, 113, 133, 0.25)" : "rgba(225, 29, 72, 0.2)";
   const tickColor = isDarkMode() ? "#cbd5e1" : "#475569";
 
   const unshadedPoints = [];
@@ -1334,7 +1230,6 @@ function drawNormalCurve(mu, sigma, shadeThreshold = null) {
       if (x <= shadeThreshold) {
         shadedPoints.push({ x, y });
       } else {
-        // Inject intersection crossover coordinate so Chart fills match seamlessly
         if (!addedThresholdIntersection && shadedPoints.length > 0) {
           const intersectY = normalPDF(shadeThreshold, mu, sigma);
           shadedPoints.push({ x: shadeThreshold, y: intersectY });
@@ -1348,7 +1243,6 @@ function drawNormalCurve(mu, sigma, shadeThreshold = null) {
     }
   }
 
-  // Define dynamic datasets
   const datasets = [
     {
       label: "Distribution Curve",
@@ -1362,7 +1256,6 @@ function drawNormalCurve(mu, sigma, shadeThreshold = null) {
     },
   ];
 
-  // Append background shaded coordinates sequence securely
   if (shadeThreshold !== null && shadedPoints.length > 0) {
     datasets.push({
       label: "Shaded Left-Tail Region",
