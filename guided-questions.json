@@ -625,7 +625,7 @@
     "steps": [
       {
         "label": "Step 1: State the null hypothesis (H₀) regarding the population mean return (μ). Please type H₀ for the null hypothesis and Hₐ for the alternative hypothesis. Also please use the mean symbol in the insert symbols menu to represent the population mean in your answer.",
-        "expected": " mu = 11.2"
+        "expected": " H_0: mu = 11.2"
       },
       {
         "label": "Step 2: State the alternative hypothesis (Hₐ) that matches the manager's claim.",
