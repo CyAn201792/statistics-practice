@@ -41,6 +41,8 @@ Once a problem is successfully solved, the application dynamically plots relevan
 
 The test bank currently holds **41 questions**, and I am actively working to expand it. If you have a question or problem set from your coursework you would like to see added, please feel free to submit questions of your own!
 
+---
+
 ## 📄 License
 This repository is licensed under the permissive MIT License. Please feel free to adapt, build upon, redistribute, or share the material any way you would like.
 Alternatively, if you would like to contribute improvements or features directly to the platform, feel free to submit a pull request and I will do my best to review and merge it into the codebase.
