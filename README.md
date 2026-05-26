@@ -1,6 +1,6 @@
 ![Stats Practice OG Image](assets/og-image.png)
 
-# 📊 Basic Statistics Practice
+# 📊 Free Statistics Practice
 
 An interactive web application designed to help students prepare for **Quantitative Business Analysis** and other core statistical courses.
 
