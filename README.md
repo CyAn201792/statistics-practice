@@ -2,7 +2,7 @@
 
 An interactive web application designed to help students prepare for **Quantitative Business Analysis** and other core statistical courses.
 
-🔗 **[Launch the App Live](https://cyan201792.github.io/statistics-practice/)**
+🔗 **[Launch the App Live](https://www.freestatspractice.com/)**
 
 ---
 
