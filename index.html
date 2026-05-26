@@ -1,38 +1,54 @@
 <!doctype html>
-<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    
+    <!-- Primary SEO Metadata -->
+    <title>Free Statistics Practice | Exam Prep & Quantitative Analysis</title>
+    <meta name="description" content="Master statistics concepts with free interactive practice problems. Perfect for qualification exams, business analytics, and quantitative data analysis." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://freestatspractice.com" />
+
+    <!-- Open Graph / Facebook (For professional links on LinkedIn/Socials) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://freestatspractice.com" />
+    <meta property="og:title" content="Free Statistics Practice | Exam Prep & Quantitative Analysis" />
+    <meta property="og:description" content="Master statistics concepts with free interactive practice problems. Perfect for qualification exams, business analytics, and quantitative data analysis." />
+    <meta property="og:image" content="https://freestatspractice.comassets/og-image.png" />
+
+    <!-- Twitter Metadata -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://freestatspractice.com" />
+    <meta name="twitter:title" content="Free Statistics Practice | Exam Prep & Quantitative Analysis" />
+    <meta name="twitter:description" content="Master statistics concepts with free interactive practice problems. Perfect for qualification exams and quantitative data analysis." />
+    <meta name="twitter:image" content="https://freestatspractice.comassets/og-image.png" />
+
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css" />
-    <title>Basic Statistics Practice</title>
 
+    <!-- Performance Optimized Scripts -->
     <script src="https://cdn.tailwindcss.com"></script>
-
     <script>
       tailwind.config = {
         darkMode: "class",
       };
     </script>
+    
+    <!-- MathLive: Deferred to prevent blocking initial page render -->
+    <script src="https://unpkg.com/mathlive" defer></script>
 
-    <script src="https://unpkg.com/mathlive"></script>
-
+    <!-- Inline Blocking Script: Prevents Dark Mode Flash (FOUC) -->
     <script>
       (() => {
         const savedTheme = localStorage.getItem("statsPracticeTheme");
-
-        const prefersDark = window.matchMedia?.(
-          "(prefers-color-scheme: dark)",
-        ).matches;
-
+        const prefersDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches;
         if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
           document.documentElement.classList.add("dark");
         }
       })();
     </script>
   </head>
+
 
   <body
     class="bg-slate-50 text-slate-800 min-h-screen flex flex-col selection:bg-slate-200 dark:bg-slate-950 dark:text-slate-100 dark:selection:bg-slate-700"
