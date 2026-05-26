@@ -1,3 +1,5 @@
+![Stats Practice OG Image](assets/og-image.png)
+
 # 📊 Basic Statistics Practice
 
 An interactive web application designed to help students prepare for **Quantitative Business Analysis** and other core statistical courses.
@@ -44,5 +46,6 @@ The test bank currently holds **41 questions**, and I am actively working to exp
 ---
 
 ## 📄 License
+
 This repository is licensed under the permissive MIT License. Please feel free to adapt, build upon, redistribute, or share the material any way you would like.
 Alternatively, if you would like to contribute improvements or features directly to the platform, feel free to submit a pull request and I will do my best to review and merge it into the codebase.
