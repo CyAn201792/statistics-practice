@@ -58,6 +58,36 @@
         darkMode: "class",
       };
     </script>
+    <script>
+  let APP_MODE = "landing";
+
+  function setMode(mode) {
+    APP_MODE = mode;
+
+    const landing = document.getElementById("landing-section");
+    const filters = document.getElementById("filters-section");
+    const practice = document.getElementById("practice-section");
+
+    const practiceUI = document.getElementById("practice-ui");
+
+    if (mode === "landing") {
+      landing.classList.remove("hidden");
+      filters.classList.add("hidden");
+      practice.classList.add("hidden");
+
+      if (practiceUI) practiceUI.classList.add("hidden");
+    }
+
+    if (mode === "practice") {
+      landing.classList.add("hidden");
+      filters.classList.remove("hidden");
+      practice.classList.remove("hidden");
+
+      if (practiceUI) practiceUI.classList.remove("hidden");
+    }
+  }
+
+</script>
 
     <!-- MathLive: Deferred to prevent blocking initial page render -->
     <script src="https://unpkg.com/mathlive" defer></script>
@@ -135,50 +165,40 @@
         </h1>
       </div>
 
-      <!-- METRICS -->
-      <div
-        class="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full xl:w-auto text-sm text-slate-300 font-medium"
-      >
-        <div
-          class="flex items-center justify-between sm:justify-center gap-2 border border-slate-700 rounded px-3 py-2 xl:border-r xl:border-l-0 xl:border-t-0 xl:border-b-0"
-        >
-          <span class="text-slate-400">Completed:</span>
+      <!-- PRACTICE ONLY UI -->
+<div id="practice-ui" class="hidden w-full flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4">
 
-          <span id="metric-completed" class="text-white font-bold font-mono"
-            >0</span
-          >
-        </div>
+  <!-- METRICS -->
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full xl:w-auto text-sm text-slate-300 font-medium">
 
-        <div
-          class="flex items-center justify-between sm:justify-center gap-2 border border-slate-700 rounded px-3 py-2 xl:border-r xl:border-l-0 xl:border-t-0 xl:border-b-0"
-        >
-          <span class="text-slate-400">Correct Steps:</span>
+    <div class="flex items-center justify-between sm:justify-center gap-2 border border-slate-700 rounded px-3 py-2 xl:border-r xl:border-l-0 xl:border-t-0 xl:border-b-0">
+      <span class="text-slate-400">Completed:</span>
+      <span id="metric-completed" class="text-white font-bold font-mono">0</span>
+    </div>
 
-          <span id="metric-correct" class="text-emerald-400 font-bold font-mono"
-            >0</span
-          >
-        </div>
+    <div class="flex items-center justify-between sm:justify-center gap-2 border border-slate-700 rounded px-3 py-2 xl:border-r xl:border-l-0 xl:border-t-0 xl:border-b-0">
+      <span class="text-slate-400">Correct Steps:</span>
+      <span id="metric-correct" class="text-emerald-400 font-bold font-mono">0</span>
+    </div>
 
-        <div
-          class="flex items-center justify-between sm:justify-center gap-2 border border-slate-700 rounded px-3 py-2 xl:border-0"
-        >
-          <span class="text-slate-400">Incorrect Attempts:</span>
+    <div class="flex items-center justify-between sm:justify-center gap-2 border border-slate-700 rounded px-3 py-2 xl:border-0">
+      <span class="text-slate-400">Incorrect Attempts:</span>
+      <span id="metric-wrong" class="text-rose-400 font-bold font-mono">0</span>
+    </div>
 
-          <span id="metric-wrong" class="text-rose-400 font-bold font-mono"
-            >0</span
-          >
-        </div>
-      </div>
+  </div>
 
-      <!-- THEME BUTTON -->
-      <button
-        id="theme-toggle"
-        type="button"
-        onclick="toggleTheme()"
-        class="w-full sm:w-auto self-stretch sm:self-center px-3 py-2 rounded border border-slate-600 bg-slate-800 hover:bg-slate-700 text-slate-100 text-xs font-bold uppercase tracking-wider transition-colors"
-      >
-        Dark
-      </button>
+  <!-- THEME BUTTON -->
+  <button
+    id="theme-toggle"
+    type="button"
+    onclick="toggleTheme()"
+    class="px-3 py-2 rounded border border-slate-600 bg-slate-800 hover:bg-slate-700 text-slate-100 text-xs font-bold uppercase tracking-wider transition-colors"
+  >
+    Dark
+  </button>
+
+</div>
     </header>
     <!-- HERO LANDING PAGE -->
     <section
@@ -1117,13 +1137,16 @@
     <script>
       // Show practice sections when user clicks "Start Practicing"
       function startPracticing() {
+        setMode("practice"); // 🔥 THIS is the missing link
+
         document.getElementById("landing-section").classList.add("hidden");
         document.getElementById("filters-section").classList.remove("hidden");
         document.getElementById("practice-section").classList.remove("hidden");
+
         document
-          .getElementById("game-container")
-          .scrollIntoView({ behavior: "smooth" });
-      }
+        .getElementById("game-container")
+        .scrollIntoView({ behavior: "smooth" });
+    }
       // Calculator functionality
       let calcDisplay = document.getElementById("calculator-display");
       let calcHistoryBox = document.getElementById("calculator-history");
