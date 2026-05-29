@@ -1,0 +1,13 @@
+{
+  "name": "stats-practice",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test:smoke": "playwright test",
+    "validate:questions": "node scripts/validate-questions.js",
+    "check": "node scripts/validate-questions.js && node --check js/state.js && node --check js/formula-palette.js && node --check js/practice-ui.js && node --check js/answer-engine.js && node --check js/charts.js && node --check js/reference-tables.js && node --check js/calculator.js && node --check js/app-shell.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.44.0"
+  }
+}

@@ -2,6 +2,144 @@
 // 📊 STATISTICAL REFERENCE TABLES MODULE
 // ==========================================================================
 
+function renderReferenceTablesModal() {
+  const mount = document.getElementById("reference-tables-mount");
+  if (!mount) return;
+
+  mount.innerHTML = `
+    <div
+      id="reference-tables-modal"
+      class="hidden fixed inset-0 bg-black/50 z-[100] flex items-center justify-center p-2 sm:p-4"
+    >
+      <div
+        class="bg-white rounded-lg shadow-xl w-full max-w-4xl h-[95vh] sm:h-auto sm:max-h-[90vh] overflow-hidden flex flex-col dark:bg-slate-900"
+      >
+        <div class="bg-indigo-600 text-white px-4 sm:px-6 py-4 flex items-center justify-between">
+          <h2 class="text-base sm:text-lg font-bold">Statistical Reference Tables</h2>
+          <button data-reference-close class="text-xl hover:text-indigo-200 transition-colors">✕</button>
+        </div>
+
+        <div class="overflow-y-auto flex-1 mobile-scroll">
+          <div class="bg-slate-100 border-b border-slate-200 px-3 sm:px-6 py-3 sticky top-0 z-10 dark:bg-slate-950 dark:border-slate-800">
+            <div class="flex gap-2 flex-wrap">
+              <button data-table="z-table" class="table-selector-btn active px-3 py-2 bg-indigo-600 text-white rounded text-xs font-bold transition-colors">Z-Table</button>
+              <button data-table="z-critical" class="table-selector-btn px-3 py-2 bg-slate-300 text-slate-700 rounded text-xs font-bold hover:bg-slate-400 transition-colors dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700">Z-Critical Values</button>
+              <button data-table="t-table" class="table-selector-btn px-3 py-2 bg-slate-300 text-slate-700 rounded text-xs font-bold hover:bg-slate-400 transition-colors dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700">T-Table</button>
+              <button data-table="chi-square" class="table-selector-btn px-3 py-2 bg-slate-300 text-slate-700 rounded text-xs font-bold hover:bg-slate-400 transition-colors dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700">Chi-Square</button>
+            </div>
+          </div>
+
+          <div id="z-table-content" class="p-6 block">
+            <div class="mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-50 p-3 rounded-lg border border-slate-200 dark:bg-slate-950 dark:border-slate-800">
+              <div>
+                <h3 class="text-sm font-bold text-slate-700 dark:text-slate-100">Standard Normal Distribution Table</h3>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400">Dynamically mapping critical mathematical data variations</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <label for="z-table-type" class="text-xs font-bold text-slate-500 font-mono whitespace-nowrap dark:text-slate-400">Format:</label>
+                <select id="z-table-type" class="bg-white border border-slate-300 rounded px-2 py-1 text-xs font-bold font-mono text-slate-700 shadow-sm focus:outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer dark:bg-slate-900 dark:border-slate-700 dark:text-slate-100">
+                  <option value="cumulative">Cumulative Left-Tail [P(Z ≤ z)]</option>
+                  <option value="meanToZ">Area from Mean to Z</option>
+                </select>
+              </div>
+            </div>
+            <div class="overflow-x-auto max-h-[420px] border border-slate-300 rounded shadow-inner dark:border-slate-700">
+              <table class="w-full border-collapse text-xs font-mono">
+                <thead class="bg-slate-200 sticky top-0 border-b border-slate-300 z-10 shadow-sm dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100">
+                  <tr>
+                    <th class="border border-slate-300 p-2 text-center font-bold bg-slate-200 sticky left-0 dark:bg-slate-800 dark:border-slate-700">z</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700">0.00</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700">0.01</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700">0.02</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700">0.03</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700">0.04</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700">0.05</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700">0.06</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700">0.07</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700">0.08</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold dark:border-slate-700">0.09</th>
+                  </tr>
+                </thead>
+                <tbody id="z-table-body" class="bg-white divide-y divide-slate-100 dark:bg-slate-900 dark:divide-slate-800"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="z-critical-content" class="p-6 hidden">
+            <h3 class="text-sm font-bold text-slate-700 mb-3 dark:text-slate-100">Critical Z-Values for Common Confidence Levels</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full border-collapse text-xs font-mono border border-slate-300 dark:border-slate-700">
+                <thead class="bg-slate-200 dark:bg-slate-800 dark:text-slate-100">
+                  <tr>
+                    <th class="border border-slate-300 p-2 text-left font-bold">Confidence Level</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold">Alpha (α)</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold">Z-Critical (Two-Tailed)</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold">Z-Critical (One-Tailed)</th>
+                  </tr>
+                </thead>
+                <tbody id="z-critical-body" class="bg-white dark:bg-slate-900"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="t-table-content" class="p-6 hidden">
+            <h3 class="text-sm font-bold text-slate-700 mb-3 dark:text-slate-100">Student's T-Distribution Critical Values</h3>
+            <p class="text-xs text-slate-600 mb-4 dark:text-slate-400">Two-tailed test values for common degrees of freedom</p>
+            <div class="overflow-x-auto">
+              <table class="w-full border-collapse text-xs font-mono border border-slate-300 dark:border-slate-700">
+                <thead class="bg-slate-200 dark:bg-slate-800 dark:text-slate-100">
+                  <tr>
+                    <th rowspan="2" class="border border-slate-300 p-2 text-left font-bold align-middle">df</th>
+                    <th colspan="10" class="border border-slate-300 p-2 text-center font-bold">One-Tail Probability</th>
+                  </tr>
+                  <tr>
+                    <th class="border border-slate-300 p-2 text-center font-bold">0.25</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold">0.20</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold">0.15</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold">0.10</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold">0.05</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold">0.025</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold">0.01</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold">0.005</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold">0.001</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold">0.0005</th>
+                  </tr>
+                </thead>
+                <tbody id="t-table-body" class="bg-white dark:bg-slate-900"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="chi-square-content" class="p-6 hidden">
+            <h3 class="text-sm font-bold text-slate-700 mb-3 dark:text-slate-100">Chi-Square Distribution Critical Values</h3>
+            <p class="text-xs text-slate-600 mb-4 dark:text-slate-400">Right-tail critical values for common degrees of freedom</p>
+            <div class="overflow-x-auto">
+              <table class="w-full border-collapse text-xs font-mono border border-slate-300 dark:border-slate-700">
+                <thead class="bg-slate-200 dark:bg-slate-800 dark:text-slate-100">
+                  <tr>
+                    <th class="border border-slate-300 p-2 text-left font-bold">df</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold">90%</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold">95%</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold">98%</th>
+                    <th class="border border-slate-300 p-2 text-center font-bold">99%</th>
+                  </tr>
+                </thead>
+                <tbody id="chi-square-body" class="bg-white dark:bg-slate-900"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-slate-50 border-t border-slate-200 px-6 py-3 flex justify-end dark:bg-slate-950 dark:border-slate-800">
+          <button data-reference-close class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded text-sm font-bold transition-colors dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200">Close</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+renderReferenceTablesModal();
+
 const zCriticalValues = [
   { confidence: "90%", alpha: 0.10, twoTailed: 1.645, oneTailed: 1.282 },
   { confidence: "95%", alpha: 0.05, twoTailed: 1.960, oneTailed: 1.645 },
@@ -309,7 +447,7 @@ function showTable(tableType) {
 
   const activeButton = [
     ...document.querySelectorAll(".table-selector-btn"),
-  ].find((btn) => btn.getAttribute("onclick")?.includes(tableType));
+  ].find((btn) => btn.dataset.table === tableType);
 
   activeButton?.classList.remove("bg-slate-300", "text-slate-700");
   activeButton?.classList.add("bg-indigo-600", "text-white");
@@ -352,4 +490,21 @@ document.addEventListener("DOMContentLoaded", () => {
       closeReferenceTables();
     }
   });
+
+  modal?.addEventListener("click", (event) => {
+    const closeButton = event.target.closest("[data-reference-close]");
+    if (closeButton) {
+      closeReferenceTables();
+      return;
+    }
+
+    const tableButton = event.target.closest("[data-table]");
+    if (tableButton) {
+      showTable(tableButton.dataset.table);
+    }
+  });
+
+  document
+    .getElementById("z-table-type")
+    ?.addEventListener("change", generateZTable);
 });
